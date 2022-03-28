@@ -1,0 +1,45 @@
+---
+layout: post
+title: 画一下Java中线程状态转换图把，越详细越好
+lock: need
+---
+
+# 面试官：画一下Java中线程状态转换图把，越详细越好
+
+简易的线程状态如下图
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020062422104430.png?)
+
+Java Thread线程内部有一个枚举内部类State，定义了Java语言线程状态的枚举值
+
+1. NEW（初始化状态）
+2. RUNNABLE （可运行/运行状态）
+3. BLOCKED（阻塞状态）
+4. WAITING （无时限等待）
+5.  TIMED_WAITING（有时限等待）
+6. TERMINATED（终止状态）
+
+Java将操作系统层面的阻塞状态细分为BLOCK，WAITING，TIMED_WAITING三种状态
+
+**NEW：新建状态**，线程被创建但未启动的状态。创建线程有三种方式
+1. 继承Thread类
+2. 实现Runnable接口
+3. 实现Callable接口
+
+我们最常用的是通过实现接口这种方式，Runnable和Callable接口的区别如下
+
+1. Runnable无法获取返回值，而Callable可以获取返回值
+2. Runnable无法抛出异常，而Callable可以抛出异常
+
+**RUNNABLE（就绪状态）**：调用start之后运行之前的状态
+**RUNNING（运行状态）**：线程正在运行
+**BLOCKED（阻塞状态）**：进入以下状态，有以下几种情况
+
+1. BLOCK（同步阻塞）：锁被其他线程占用，如等待进入synchronized方法或者代码块
+2. WAITING（主动阻塞）：执行Object.wait()，Thread.join()等
+3. TIMED_WAITING（等待阻塞）：执行Object.wait(long)，Thread.sleep(long)等
+
+**DEAD（终止状态）**：线程执行完毕
+最后将各种方法补充到线程状态图上
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2020062609024463.PNG?)
