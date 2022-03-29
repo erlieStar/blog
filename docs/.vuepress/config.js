@@ -393,6 +393,14 @@ function seata() {
 function dubbo() {
     return [
         {
+            title: "随笔",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "你管这个叫Dubbo.md",
+            ]
+        },
+        {
             title: "Dubbo实战",
             collapsable: false,
             sidebarDepth: 0,
@@ -408,7 +416,6 @@ function dubbo() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "你管这个叫Dubbo.md",
                 "5分钟了解 Dubbo SPI 的特性.md",
                 "Dubbo SPI是如何实现 AOP，IOC，自适应，自动激活的.md",
                 "基于XML配置原理解析.md",
