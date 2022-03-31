@@ -318,6 +318,7 @@ function mysql() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "如何快速定位慢SQL.md",
                 "explain详解-1.md",
                 "explain详解-2.md"
             ]
