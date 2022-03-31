@@ -69,6 +69,9 @@ module.exports = {
                         text: 'Redis', link: '/md/redis/Redis数据结构为什么既省内存又高效.md'
                     },
                     {
+                        text: 'MySQL', link: '/md/mysql/explain详解-1.md'
+                    },
+                    {
                         text: 'MQ',
                         items: [
                             {
@@ -122,7 +125,8 @@ module.exports = {
                     "/md/transaction/": transaction(),
                     "/md/seata/": seata(),
                     "/md/algorithm/": algorithm(),
-                    "/md/redis/": redis()
+                    "/md/redis/": redis(),
+                    "/md/mysql/": mysql()
                 }
             }
         }
@@ -302,6 +306,20 @@ function jvm() {
                 "哪些区域会发生内存溢出.md",
                 "使用MAT进行内存溢出排查.md",
                 "618核心服务内存溢出排查实战.md"
+            ]
+        }
+    ]
+}
+
+function mysql() {
+    return [
+        {
+            title: "MySQL",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "explain详解-1.md",
+                "explain详解-2.md"
             ]
         }
     ]
