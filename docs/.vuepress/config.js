@@ -322,7 +322,9 @@ function mysql() {
                 "MVCC是如何实现的.md",
                 "如何快速定位慢SQL.md",
                 "explain详解-1.md",
-                "explain详解-2.md"
+                "explain详解-2.md",
+                "join 语句怎么优化.md",
+                "order by 语句怎么优化.md"
             ]
         }
     ]
