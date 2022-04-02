@@ -288,7 +288,8 @@ function concurrent() {
             sidebarDepth: 0,
             children: [
                 "ThreadLocal为什么会内存泄漏.md",
-                "读多写少？试试CopyOnWriteArrayList.md"
+                "读多写少？试试CopyOnWriteArrayList.md",
+                "HashMap.md"
             ]
         },
     ]
