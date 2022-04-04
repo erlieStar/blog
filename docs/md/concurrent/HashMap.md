@@ -405,7 +405,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 				if ((e = p.next) == null) {
 					// 插入新元素，可以看到是尾插法
 					p.next = newNode(hash, key, value, null);
-					// 链表长度 >= 8，并且数组长度 > 64，链表转为红黑树
+					// 链表长度 >= 8，并且数组长度 >= 64，链表转为红黑树
                     // 否则扩容
 					if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
 						treeifyBin(tab, hash);
@@ -438,7 +438,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 ```
 **这里有个需要注意的点为**
 
-链表长度 >= 8，并且数组长度 > 64，链表转为红黑树，否则扩容
+链表长度 >= 8，并且数组长度 >= 64，链表转为红黑树，否则扩容
 
 **jdk1.8在rehash的过程中，计算元素在新数组中的下标的算法发生了变化（实际效果没发生改变）**
 1. jdk1.7，index = hash & (newTable.length - 1)
