@@ -405,7 +405,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 				if ((e = p.next) == null) {
 					// 插入新元素，可以看到是尾插法
 					p.next = newNode(hash, key, value, null);
-					// 链表长度超过8转位红黑树
+					// 链表长度超过8转为红黑树
 					if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
 						treeifyBin(tab, hash);
 					break;
@@ -435,6 +435,21 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 	return null;
 }
 ```
+在我还没看HashMap源码之前就一直听到这样一个结论，当链表的长度大于8是，会转为红黑树，事实真是这样吗？
+
+看代码
+
+```java
+// 链表长度超过8转为红黑树
+if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+	treeifyBin(tab, hash);
+```
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/28193969806e46708133bb1f15a16a1c.png)
+
+**链表转位红黑树的条件为，链表的长度超过8，并且数组的长度大于64。**
+
+当链表的长度超过8，但是数组长度小于等于64时，会先扩容
 
 **jdk1.8在rehash的过程中，计算元素在新数组中的下标的算法发生了变化（实际效果没发生改变）**
 1. jdk1.7，index = hash & (newTable.length - 1)
