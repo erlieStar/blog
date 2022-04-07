@@ -289,8 +289,9 @@ function concurrent() {
             children: [
                 "ThreadLocal为什么会内存泄漏.md",
                 "读多写少？试试CopyOnWriteArrayList.md",
-                "HashMap.md",
-                "ConcurrentHashMap.md"
+                "HashMap-1.7.md",
+                "HashMap-1.8.md",
+                "ConcurrentHashMap-1.7.md"
             ]
         },
     ]

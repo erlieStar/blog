@@ -125,5 +125,3 @@ registerDisposableBeanIfNecessary的作用就是把实现了Bean销毁方法的B
 private final Map<String, Object> disposableBeans = new LinkedHashMap<>();
 ```
 当容器关闭的时候，就会从disposableBeans拿到需要执行销毁方法的Bean，然后执行对应的销毁方法，**执行的优先级为@PreDestroy > DisposableBean > 自定义销毁方法**
-## 参考博客
-[1]
