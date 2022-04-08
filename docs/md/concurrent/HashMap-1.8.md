@@ -300,6 +300,19 @@ final Node<K,V> getNode(int hash, Object key) {
 
 **jdk1.8中死循环问题已经解决，元素丢失问题还存在**
 
+**为什么多线程put会导致元素丢失？**
+
+我们结合代码来分析一下，假如说同时有2个线程往table[4]的地方放置元素，table[4]目前没有元素
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/658b2b5959c94f2c9af547c6fc1a183d.png)
+
+线程1执行完如下代码的第一行还没有执行第二行，CPU发生切换。接着线程2执行完如下2行代码，将key2的节点放到table[4]中，接着线程1执行第二行，将key1的节点放到table[4]中，这样就会造成key2的数据丢失
+```java
+// putVal
+if ((p = tab[i = (n - 1) & hash]) == null)
+	tab[i] = newNode(hash, key, value, null);
+```
+
 ## 如何避免HashMap在高并发下的问题？
 1. 使用ConcurrentHashMap
 2. 用Collections.synchronizedMap(hashMap)包装成同步集合
