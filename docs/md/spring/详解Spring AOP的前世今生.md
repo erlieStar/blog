@@ -258,6 +258,21 @@ public static void main(String[] args) {
 上面的Demo可以改为如下形式，变化基本不大
 
 **手动配置**
+
+```java
+public class CostMethodInterceptor implements MethodInterceptor {
+
+    @Override
+    public Object invoke(MethodInvocation invocation) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        Object result = invocation.proceed();
+        long cost = System.currentTimeMillis() - startTime;
+        System.out.println("cost " + cost);
+        return result;
+    }
+}
+```
+
 ```java
 public class ProxyConfig {
 
