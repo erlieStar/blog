@@ -17,7 +17,9 @@ lock: need
 **Spring AOP的实现主要经历了2代**
 
 第一代：spring1.x版本，自己实现了AOP的功能
+
 第二代：spring2.x版本，Spring集成了AspectJ的实现
+
 ## Spring AOP一代
 **当我们要基于现成的实现增加横切逻辑时，首先需要找到哪些地方增强，我们就用Pointcut来进行筛选吧**
 
