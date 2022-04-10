@@ -111,7 +111,7 @@ spring aop默认只会使用JDK和CGLIB来生成代理对象
 ### @Transactional注解应用到非public方法
 **为什么只有public方法上的@Transactional注解才会生效？**
 
-首相JDK动态代理肯定只能是public，因为接口的权限修饰符只能是public。cglib代理的方式是可以代理protected方法的（private不行哈，子类访问不了父类的private方法）如果支持protected，可能会造成当切换代理的实现方式时表现不同，增大出现bug的可能醒，所以统一一下。
+看spring专栏
 
 **如果想让非public方法也生效，你可以考虑使用AspectJ**
 
