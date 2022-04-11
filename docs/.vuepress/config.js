@@ -291,7 +291,8 @@ function concurrent() {
                 "读多写少？试试CopyOnWriteArrayList.md",
                 "HashMap-1.7.md",
                 "HashMap-1.8.md",
-                "ConcurrentHashMap-1.7.md"
+                "ConcurrentHashMap-1.7.md",
+                "ConcurrentHashMap-1.8.md"
             ]
         },
     ]
