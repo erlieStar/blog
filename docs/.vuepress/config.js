@@ -69,7 +69,7 @@ module.exports = {
                         text: 'Redis', link: '/md/redis/Redis数据结构为什么既省内存又高效.md'
                     },
                     {
-                        text: 'MySQL', link: '/md/mysql/explain详解-1.md'
+                        text: 'MySQL', link: '/md/mysql/数据是如何进行存储和查询的.md'
                     },
                     {
                         text: 'MQ',
