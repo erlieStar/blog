@@ -103,7 +103,7 @@ module.exports = {
                         items: [
                             {
                                 text: '手写RPC',
-                                link: '/md/other/writing.md'
+                                link: '/md/rpc/如何手写一个RPC框架.md'
                             },
                             {
                                 text: 'Dubbo',
@@ -118,6 +118,7 @@ module.exports = {
                     "/md/jvm/": jvm(),
                     "/md/concurrent/": concurrent(),
                     "/md/dubbo/": dubbo(),
+                    "/md/rpc/": rpc(),
                     "/md/spring/": spring(),
                     "/md/rocketmq/": rocketmq(),
                     "/md/algorithm/": algorithm(),
@@ -335,6 +336,27 @@ function mysql() {
     ]
 }
 
+function rpc() {
+    return [
+        {
+            title: "RPC",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "如何手写一个RPC框架.md",
+                "极简版.md",
+                "5分钟极速入门Netty的使用.md",
+                "Netty高性能的秘密是.md",
+                "详解ZooKeeper和客户端框架Curator.md",
+                "Spring Bean 生命周期详解.md",
+                "可扩展性神器 Java SPI.md",
+                "基于Java SPI的可扩展版.md",
+                "基于RPC框架封装一个spring-boot-starter.md"
+            ]
+        }
+    ]
+}
+
 function mybatis() {
     return [
         {
@@ -421,14 +443,6 @@ function seata() {
 function dubbo() {
     return [
         {
-            title: "随笔",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "你管这个叫Dubbo.md",
-            ]
-        },
-        {
             title: "Dubbo实战",
             collapsable: false,
             sidebarDepth: 0,
@@ -458,7 +472,8 @@ function dubbo() {
                 "客户端服务调用过程.md",
                 "Dubbo是如何同时支持同步调用和异步调用的.md",
                 "详解集群容错和负载均衡策略.md",
-                "Dubbo过滤器.md"
+                "Dubbo过滤器.md",
+                "从头走一遍Dubbo的执行流程.md"
             ]
         },
         {
