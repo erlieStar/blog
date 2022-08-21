@@ -9,6 +9,7 @@ lock: need
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210527193642348.jpg?)
 ## 介绍
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210527110204216.png)
+
 在使用Dubbo开发时，我们一般将项目分为如下3个模块
 
 api：将服务提供者和服务消费者都需要用到的接口放在api层
