@@ -57,7 +57,7 @@ module.exports = {
                         ]
                     },
                     {
-                        text: 'JVM', link: '/md/jvm/使用MAT进行内存溢出排查.md'
+                        text: 'JVM', link: '/md/jvm/常见的垃圾回收算法有哪些.md'
                     },
                     {
                         text: 'Spring', link: '/md/spring/Spring容器启动流程.md'
