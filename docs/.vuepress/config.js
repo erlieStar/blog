@@ -18,7 +18,8 @@ module.exports = {
                     s.parentNode.insertBefore(hm, s);
                 })();
             `
-        ]
+        ],
+        ['meta', { id: 'referrer', name: 'referrer', content: 'never' }]
     ],
     themeConfig: {
         docsRepo: "erlieStar/javashitang",
