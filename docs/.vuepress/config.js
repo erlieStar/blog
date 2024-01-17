@@ -21,6 +21,7 @@ module.exports = {
         ],
         ['meta', { id: 'referrer', name: 'referrer', content: 'never' }]
     ],
+    base: '/',
     themeConfig: {
         docsRepo: "erlieStar/javashitang",
         // 编辑文档的所在目录
