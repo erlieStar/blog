@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ElasticSearch 原理分析
+title: ElasticSearch 索引操作
 lock: need
 ---
 

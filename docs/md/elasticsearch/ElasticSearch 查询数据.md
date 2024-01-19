@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ElasticSearch 文档操作
+title: ElasticSearch 查询数据
 lock: need
 ---
 
