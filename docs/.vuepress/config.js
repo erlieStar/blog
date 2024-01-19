@@ -682,6 +682,7 @@ function elasticsearch() {
                 "ElasticSearch 原理分析.md",
                 "ElasticSearch 索引操作.md",
                 "ElasticSearch 文档操作.md",
+                "ElasticSearch 查询数据.md",
                 "ElasticSearch 文本分析.md",
                 "ElasticSearch 聚合统计.md",
                 "ElasticSearch 性能优化.md",
