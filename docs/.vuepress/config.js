@@ -84,8 +84,14 @@ module.exports = {
                                 text: 'RocketMq',
                                 link: '/md/rocketmq/架构及特性一览.md'
                             },
+                            {
+                                text: 'Kafka',
+                                link: '/md/rocketmq/架构及特性一览.md'
+                            },
                         ]
-
+                    },
+                    {
+                        text: 'ElasticSearch', link: '/md/elasticsearch/ElasticSearch 集群搭建.md'
                     },
                     {
                         text: '分布式事务',
@@ -129,7 +135,9 @@ module.exports = {
                     "/md/seata/": seata(),
                     "/md/algorithm/": algorithm(),
                     "/md/redis/": redis(),
-                    "/md/mysql/": mysql()
+                    "/md/mysql/": mysql(),
+                    "/md/elasticsearch/": elasticsearch(),
+                    "/md/kafka/": kafka()
                 }
             }
         }
@@ -658,6 +666,38 @@ function algorithm() {
                 "回溯：就是一个遍历决策树的过程.md",
                 "搜索：DFS和BFS遍历图的方式有哪些不同.md",
                 "动态规划：更高效的穷举.md",
+            ]
+        }
+    ]
+}
+
+function elasticsearch() {
+    return [
+        {
+            title: "ElasticSearch",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "ElasticSearch 集群搭建.md",
+                "ElasticSearch 原理分析.md",
+                "ElasticSearch 索引操作.md",
+                "ElasticSearch 文档操作.md",
+                "ElasticSearch 文本分析.md",
+                "ElasticSearch 聚合统计.md",
+                "ElasticSearch 性能优化.md",
+            ]
+        }
+    ]
+}
+
+function kafka() {
+    return [
+        {
+            title: "Kafka",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "ElasticSearch 集群搭建.md",
             ]
         }
     ]

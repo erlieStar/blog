@@ -7,10 +7,10 @@ set -e
 sudo vuepress build docs
 
 # 进入生成的文件夹s
-rm -rf /Users/li/study-code/web
-cp -r /Users/li/study-code/blog/site /Users/li/study-code
+rm -rf /Users/li/soft/site
+cp -r /Users/li/study-code/blog/site /Users/li/soft
 
-cd /Users/li/study-code/site
+cd /Users/li/soft/site
 git init
 git add -A
 git commit -m 'deploy'
