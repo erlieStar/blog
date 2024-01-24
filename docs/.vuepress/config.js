@@ -77,21 +77,21 @@ module.exports = {
                         text: 'MQ',
                         items: [
                             {
-                                text: 'RabbitMq',
-                                link: '/md/rabbitmq/消息中间件的诸侯征战史.md'
+                                text: 'Kafka',
+                                link: '/md/kafka/Kafka集群搭建.md'
                             },
                             {
                                 text: 'RocketMq',
                                 link: '/md/rocketmq/架构及特性一览.md'
                             },
                             {
-                                text: 'Kafka',
-                                link: '/md/rocketmq/架构及特性一览.md'
-                            },
+                                text: 'RabbitMq',
+                                link: '/md/rabbitmq/消息中间件的诸侯征战史.md'
+                            }
                         ]
                     },
                     {
-                        text: 'ElasticSearch', link: '/md/elasticsearch/ElasticSearch 集群搭建.md'
+                        text: 'ElasticSearch', link: '/md/elasticsearch/ElasticSearch集群搭建.md'
                     },
                     {
                         text: '分布式事务',
@@ -663,6 +663,7 @@ function algorithm() {
                 "递推和递归：一个自下而上，一个自上而下.md",
                 "贪心：每次都选局部最优解.md",
                 "二分查找：如何优雅的确定搜索区间.md",
+                "双指针：反向扫描和同向扫描.md",
                 "回溯：就是一个遍历决策树的过程.md",
                 "搜索：DFS和BFS遍历图的方式有哪些不同.md",
                 "动态规划：更高效的穷举.md",
@@ -698,7 +699,7 @@ function kafka() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "ElasticSearch 集群搭建.md",
+                "Kafka 集群搭建.md",
             ]
         }
     ]
