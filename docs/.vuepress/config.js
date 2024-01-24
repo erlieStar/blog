@@ -679,7 +679,7 @@ function elasticsearch() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "ElasticSearch 集群搭建.md",
+                "ElasticSearch集群搭建.md",
                 "ElasticSearch 原理分析.md",
                 "ElasticSearch 索引操作.md",
                 "ElasticSearch 文档操作.md",
@@ -699,7 +699,7 @@ function kafka() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "Kafka 集群搭建.md",
+                "Kafka集群搭建.md",
             ]
         }
     ]
