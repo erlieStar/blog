@@ -1,6 +1,11 @@
 ---
 title: 目录
 ---
+# 网址
+
+[Github Pages](https://erliestar.github.io/blog/)
+
+[Gitee Pages（国内访问较快）](https://erliestar.gitee.io/blog/)
 
 # 导读
 
