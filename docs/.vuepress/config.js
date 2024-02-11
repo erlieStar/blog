@@ -667,6 +667,7 @@ function algorithm() {
                 "回溯：就是一个遍历决策树的过程.md",
                 "搜索：DFS和BFS遍历图的方式有哪些不同.md",
                 "动态规划：更高效的穷举.md",
+                "数学在算法中的应用：数论和线性代数.md"
             ]
         }
     ]
@@ -702,7 +703,8 @@ function kafka() {
                 "Kafka集群搭建.md",
                 "Kafka消息存储.md",
                 "Kafka消息发送.md",
-                "Kafka消息消费.md"
+                "Kafka消息消费.md",
+                "Kafka线上问题.md"
             ],
         }
     ]
