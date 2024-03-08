@@ -94,10 +94,14 @@ module.exports = {
                         text: 'ElasticSearch', link: '/md/elasticsearch/ElasticSearch集群搭建.md'
                     },
                     {
-                        text: '分布式事务',
+                        text: '系统',
                         items: [
                             {
-                                text: '解决方案',
+                                text: '分布式事务',
+                                link: '/md/transaction/01.7种常见解决方案汇总.md'
+                            },
+                            {
+                                text: '缓存',
                                 link: '/md/transaction/01.7种常见解决方案汇总.md'
                             },
                             {
