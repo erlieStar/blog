@@ -339,8 +339,10 @@ function mysql() {
                 "如何快速定位慢SQL.md",
                 "explain详解-1.md",
                 "explain详解-2.md",
+                "索引优化策略有哪些.md",
                 "join 语句怎么优化.md",
-                "order by 语句怎么优化.md"
+                "order by 语句怎么优化.md",
+                "分页如何优化.md"
             ]
         }
     ]
