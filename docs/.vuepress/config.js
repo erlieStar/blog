@@ -94,14 +94,10 @@ module.exports = {
                         text: 'ElasticSearch', link: '/md/elasticsearch/ElasticSearch集群搭建.md'
                     },
                     {
-                        text: '系统',
+                        text: '分布式',
                         items: [
                             {
                                 text: '分布式事务',
-                                link: '/md/transaction/01.7种常见解决方案汇总.md'
-                            },
-                            {
-                                text: '缓存',
                                 link: '/md/transaction/01.7种常见解决方案汇总.md'
                             },
                             {
@@ -629,7 +625,9 @@ function redis() {
                 "详解Redis超实用工具类库Redisson.md",
                 "Redis哨兵机制.md",
                 "缓存淘汰策略.md",
-                "Redis有哪些慢操作.md"
+                "Redis有哪些慢操作.md",
+                "缓存雪崩，缓存穿透，缓存击穿.md",
+                "如何保证缓存和数据库的一致性.md"
             ]
         }
     ]

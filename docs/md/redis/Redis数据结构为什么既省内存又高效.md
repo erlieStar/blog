@@ -3,7 +3,7 @@ layout: post
 title: Redis数据结构为什么既省内存又高效？
 lock: need
 ---
-# Redis源码解析：Redis数据结构为什么既省内存又高效？
+# Redis实战：Redis数据结构为什么既省内存又高效？
 
 ![请添加图片描述](https://img-blog.csdnimg.cn/53f4a45050f3438f8c18ff0072c17e93.png)
 ## 底层存储

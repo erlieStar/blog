@@ -4,7 +4,7 @@ title: Redis持久化策略详解（一）
 lock: need
 ---
 
-# Redis源码解析：Redis持久化策略详解（一）
+# Redis实战：Redis持久化策略详解（一）
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103105149774.jpg?)
 ## Redis如何进行持久化？

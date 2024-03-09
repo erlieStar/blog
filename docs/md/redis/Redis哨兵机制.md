@@ -4,7 +4,7 @@ title: Redis哨兵机制
 lock: need
 ---
 
-# Redis源码解析：Redis哨兵机制
+# Redis实战：Redis哨兵机制
 
 ![请添加图片描述](https://img-blog.csdnimg.cn/7c4ed1ba25ff4a92b4f7c8a0464ac436.png)
 

@@ -3,7 +3,7 @@ layout: post
 title: Redis有哪些慢操作？
 lock: need
 ---
-# Redis源码解析：Redis有哪些慢操作？
+# Redis实战：Redis有哪些慢操作？
 
 ![请添加图片描述](https://img-blog.csdnimg.cn/8c77b555b2de4d8c86ad88e23caca21a.png)
 ## Redis是否变慢了？

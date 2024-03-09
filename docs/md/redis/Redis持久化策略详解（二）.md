@@ -4,7 +4,7 @@ title: Redis持久化策略详解（二）
 lock: need
 ---
 
-# Redis源码解析：Redis持久化策略详解（二）
+# Redis实战：Redis持久化策略详解（二）
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/eff3251be82c459499b2e6cc1f8ab839.png)
 ## RDB

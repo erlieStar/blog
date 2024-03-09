@@ -3,7 +3,7 @@ layout: post
 title: 单线程的Redis为什么能支持10w+的QPS?
 lock: need
 ---
-# Redis源码解析：单线程的Redis为什么能支持10w+的QPS?
+# Redis实战：单线程的Redis为什么能支持10w+的QPS?
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210130141613187.jpg?)
 ## 单线程为什么能支持10w+的QPS？
