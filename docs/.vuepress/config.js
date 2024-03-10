@@ -334,6 +334,8 @@ function mysql() {
             sidebarDepth: 0,
             children: [
                 "数据是如何进行存储和查询的.md",
+                "Buffer Pool 提高页的访问速度.md",
+                "脏读，不可重复读，幻读.md",
                 "三种日志都有啥用.md",
                 "MVCC是如何实现的.md",
                 "如何快速定位慢SQL.md",
