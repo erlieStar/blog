@@ -336,15 +336,17 @@ function mysql() {
                 "数据是如何进行存储和查询的.md",
                 "Buffer Pool 提高页的访问速度.md",
                 "脏读，不可重复读，幻读.md",
-                "三种日志都有啥用.md",
+                "MySQL有哪些锁.md",
                 "MVCC是如何实现的.md",
+                "三种日志都有啥用.md",
                 "如何快速定位慢SQL.md",
                 "explain详解-1.md",
                 "explain详解-2.md",
                 "索引优化策略有哪些.md",
                 "join 语句怎么优化.md",
                 "order by 语句怎么优化.md",
-                "分页如何优化.md"
+                "分页如何优化.md",
+                "问题排查与监控.md"
             ]
         }
     ]
