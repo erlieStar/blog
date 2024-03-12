@@ -53,7 +53,7 @@ DefaultListableBeanFactory同时实现了BeanDefinitionRegistry接口和BeanFact
 BeanFactory根据BeanDefinition生成Bean的过程是一个标准化的流程，就像一个流水线一样，当然你可以在这个流水线上做一些自定义的操作。**在Spring中你可以通过实现BeanPostProcessor来干预Bean的生产过程**
 
 **BeanFactoryPostProcessor**
-Spring作为一个强大的容器，不仅能让你干预Bean的生产过程，还可以让你干预BeanFactory，**例如你可以通过BeanFactoryPostProcessor将Bean的作用域都该成单例，默认是原型**
+Spring作为一个强大的容器，不仅能让你干预Bean的生产过程，还可以让你干预BeanFactory，**例如你可以通过BeanFactoryPostProcessor将Bean的作用域都改成原型，默认是单例**
 
 **所以BeanPostProcessor和BeanFactoryPostProcessor是spring容器2个很重要的扩展点，大多数框架和Spring框架继承基本上都是基于这2个扩展点来的**
 ## 容器初始化过程

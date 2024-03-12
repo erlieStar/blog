@@ -53,8 +53,11 @@ Resource：javax.annotation.Resource
 2. 如果没有类型符合的bean，则看@Autowired的required属性是否为true，是则抛出异常，否则返回null
 3. 如果只有一个，则将这个bean注入
 4. 如果有多个bean
+
     4.1 选择其中带有Primary注解的bean，如果只有一个直接注入，如果有多个bean带有Primary注解则报错，如果不存在就下一步
+
     4.2 选择其中优先级最高的bean(优先级使用javax.annotation.Priority表明)，如果只有一个直接注入，如果有多个bean的优先级并列最高则报错，如果不存在就下一步
+
     4.3 选择beanName和当前要注入的属性名相同的bean进行注入，有则注入，没有则报错
 ## @Resource
 @Resource的依赖注入过程是由CommonAnnotationBeanPostProcessor支持的

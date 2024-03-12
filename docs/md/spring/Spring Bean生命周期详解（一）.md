@@ -33,7 +33,7 @@ SimpleAliasRegistry：对AliasRegistry进行实现。使用map保存 bean的别�
 
 BeanDefinitionRegistry：定义对BeanDefinition的增删查操作
 
-SingletonBeanRegistry：实现对单例Bean的注册和互殴去
+SingletonBeanRegistry：实现对单例Bean的注册和获取
 
 DefaultSingletonBeanRegistry：对SingletonBeanRegistry进行实现。用map保存生成的单例Bean
 
