@@ -106,6 +106,7 @@ Facebook的Thrift和Google的grpc都是定义一个schema文件，然后执行�
 
 ## 序列化
 协议头的内容是通过位来表示的，协议体在应用程序中则会被封装成对象，如Dubbo将请求封装成Request，将响应封装成Response
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201030095049568.png)
 
 
@@ -186,9 +187,3 @@ Zookeeper中的事件如下
 ## 小结
 
 当然一个成熟的RPC框架还得考虑很多内容，例如路由策略，异常重试，监控，异步调用等，和主流程相关度不大，就不多做介绍了
-
-## 参考博客
-[1]https://blog.csdn.net/zzti_erlie/article/details/82292083
-[2]https://www.cnblogs.com/LBSer/p/4853234.html
-协议
-[3]https://dubbo.apache.org/zh-cn/blog/dubbo-protocol.html

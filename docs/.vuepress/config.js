@@ -97,6 +97,10 @@ module.exports = {
                         text: '分布式',
                         items: [
                             {
+                                text: '系统设计',
+                                link: '/md/seata/01.seata和spring是如何整合的.md'
+                            },
+                            {
                                 text: '分布式事务',
                                 link: '/md/transaction/01.7种常见解决方案汇总.md'
                             },
@@ -474,6 +478,7 @@ function dubbo() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "从头走一遍Dubbo的执行流程.md",
                 "5分钟了解 Dubbo SPI 的特性.md",
                 "Dubbo SPI是如何实现 AOP，IOC，自适应，自动激活的.md",
                 "基于XML配置原理解析.md",
@@ -488,8 +493,7 @@ function dubbo() {
                 "客户端服务调用过程.md",
                 "Dubbo是如何同时支持同步调用和异步调用的.md",
                 "详解集群容错和负载均衡策略.md",
-                "Dubbo过滤器.md",
-                "从头走一遍Dubbo的执行流程.md"
+                "Dubbo过滤器.md"
             ]
         },
         {
