@@ -82,7 +82,7 @@ module.exports = {
                             },
                             {
                                 text: 'RocketMq',
-                                link: '/md/rocketmq/架构及特性一览.md'
+                                link: '/md/rocketmq/消息发送和消费核心流程汇总.md'
                             },
                             {
                                 text: 'RabbitMq',
@@ -350,7 +350,8 @@ function mysql() {
                 "join 语句怎么优化.md",
                 "order by 语句怎么优化.md",
                 "分页如何优化.md",
-                "问题排查与监控.md"
+                "问题排查.md",
+                "监控.md"
             ]
         }
     ]
