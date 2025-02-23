@@ -6,7 +6,7 @@ lock: need
 
 # 并发工具类：AQS有哪些作用？（一）
 
-![请添加图片描述](https://img-blog.csdnimg.cn/c04d44a2c08446e4b19317466538f18b.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/0d62507b3ffe0437ef2d49fef0f65d53.jpeg)
 ## 如何手写一个锁？
 如果让我们自己基于API来实现一个锁，你会将实现拆分为几部分呢？
 
@@ -24,8 +24,8 @@ lock: need
 1. 用一个变量state作为锁的标志位，默认是0，表示此时所有线程都可以加锁，加锁的时候通过cas将state从0变为1，cas执行成功表示加锁成功
 
 2. 当有线程占有了锁，这时候有其他线程来加锁，判断当前来抢锁的线程是不是占用锁的线程？
-是：重入锁，state+1，当释放的时候state-1，用state表示加锁的次数
-否：加锁失败，将线程放入队列，并且阻塞
+   是：重入锁，state+1，当释放的时候state-1，用state表示加锁的次数
+   否：加锁失败，将线程放入队列，并且阻塞
 
 ### 解锁
 1. 通过cas对state-1，如果是重入锁，释放一次减一次，当state=0时表示锁被释放。
@@ -96,9 +96,7 @@ protected boolean tryRelease(int arg) {
 **所以你看基于AQS实现的锁，基本上只重写了这2个方法，意识到AQS这个类封装的有多好了把？**
 
 为了保存持有锁的线程，用来实现可重入锁，AbstractQueuedSynchronizer继承了AbstractOwnableSynchronizer类，这个类只用来保存获取锁的线程，没有其他逻辑
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c71935d0891f4b9f95197897afe17b15.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ddb6e4a05537857a953dd69a120752df.png)
 上面的例子中，我们在手写锁的时候，队列是Queue，并且是把Thread直接放到Queue中，而在AQS中定义了一个类Node来包装线程，并且使用双向链表来实现队列的
 
 ```java
@@ -130,8 +128,7 @@ static final class Node {
 
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2fecbd200ebf4fd9a2c74020107fd0c1.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/acb4c168281fd38a11223c3c96a863ac.png)
 **我们只分析同步队列哈，等待队列和Condition相关，我们后续来分析**
 
 可以看到Node类中还有一个重要的属性waitStatus（默认是0）表示线程的状态，包含的状态有
@@ -166,13 +163,9 @@ head和tail比较好理解，指向同步队列的头节点和尾节点
 **Semaphore**：state表示资源的数量，state>0时，可以获取资源，并将state-1，当state=0时，获取不到资源，此时线程会被阻塞。当资源被释放时，state+1，此时其他线程可以获得资源
 
 state的值都是在工具类的构造函数中赋值的
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/92308fc39ff34b11bb95d6038533a522.png)
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/02f9d8054a914b76a4b3ac3833474c56.png)
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a4076fa1210a4e48ae43762ce347f2cd.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/f436ff6b28fb22c13a8e8405f4865d2f.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/0aa7525e5cdfc6db676b5f27de63d626.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/1832db3f0ac5459842e5a7e0ca87f3cc.png)
 从类的继承图我们可以明显看到在锁的实现中AQS起到了非常重要的作用
 
 
@@ -180,9 +173,7 @@ state的值都是在工具类的构造函数中赋值的
 
 ## 获取独占锁
 ReentrantLock获取独占锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7e9bb70b1aaa4ed6898b594e1a0137e3.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c99098c8c44e113a486ac05553427da1.png)
 **ReentrantLock的实现分为公平锁和非公平锁，默认是非公平锁，吞吐量更高，我们就单独分析一下非公平锁**
 
 可以看到上来先尝试获取一波锁，并没有直接到同步队列中等待，这就是非公平性的体现
@@ -239,8 +230,7 @@ final boolean nonfairTryAcquire(int acquires) {
 从加锁的逻辑我们可以看出ReentrantLock是一个重入锁
 ## 释放独占锁
 ReentrantLock释放独占锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8b192ebb7a8946f8865157942577869a.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c88a0497f45e18d369695c9872449fdf.png)
 
 ```java
 // ReentrantLock#unlock
@@ -319,8 +309,7 @@ public class MyLock {
 
 ## 获取共享锁
 ### CountDownLatch获取共享锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/bf5f29af8dd04e6daaf3662ec1077b5f.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ad9f9633f4cbe16c428f73d83b1909d2.png)
 
 ```java
 // CountDownLatch#await()
@@ -350,8 +339,7 @@ protected int tryAcquireShared(int acquires) {
 **state=0，则获锁成功，执行业务逻辑。否则，进入同步队列阻塞**
 
 #### Semaphore获取共享锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d6b8c3c355374ed4849fccdcd0a008bd.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/3403ae2c2fa1694eb187e89214c51875.png)
 
 ```java
 // Semaphore#acquire()
@@ -396,8 +384,7 @@ remaining（剩余的资源数）= state（总的资源数）- acquires（需要
 **剩余的资源数小于0则进入同步队列。进行阻塞，否则执行业务逻辑**
 ## 释放共享锁
 ### CountDownLatch释放共享锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/1b92160950eb4a86972bf0cbf40f61aa.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/5c0dbcd615405d9b534bb81f03646ab0.png)
 
 ```java
 // CountDownLatch#countDown
@@ -435,8 +422,7 @@ protected boolean tryReleaseShared(int releases) {
 ```
 **state-1=0表明同步队列中没有线程了，需要执行释放锁逻辑。否则同步队列中还有线程，不能执行释放锁逻辑**
 ### Semaphore释放共享锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/9fe6b2ab7ccf4644b9c7bc4711be86a9.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/3e518fbf6e74b3d67ffb549e96e8943b.png)
 
 ```java
 // Semaphore#release()

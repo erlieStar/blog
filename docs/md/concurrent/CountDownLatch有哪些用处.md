@@ -4,8 +4,7 @@ title: CountDownLatch有哪些用处？
 lock: need
 ---
 # 并发工具类：CountDownLatch有哪些用处？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210210184304457.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/8dc48d1d283c03f51c921eec7f60fd96.jpeg)
 ## CountDownLatch常见用法
 CountDownLatch是jdk1.5之后提供的并发流程控制的工具类，它主要有如下两个方面的作用
 
@@ -50,8 +49,7 @@ public class CountDownLatchUseCase1 {
 2 号运动员完成比赛
 运动员都跑完，裁判宣布比赛结束
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180523174320124?)
-
+![这里写图片描述](https://i-blog.csdnimg.cn/blog_migrate/33d22dc03dbf155433c5c1102fb8a457.png)
 ### 多个线程等待一个线程的信号，然后同时开始执行
 
 ```java
@@ -95,7 +93,7 @@ public class CountDownLatchUseCase2 {
 1 号运动员开始跑步
 ```
 ## 共享锁的应用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/13edaff4118a42c5b7d452976cb55a23.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e6a9f40b1a4e40af7fc3223fa9ab644f.png)
 
 CountDownLatch的源码非常少，主要是通过操作AbstractQueuedSynchronizer中共享锁的api来实现的，我们在AQS文章中其实基本上把CountDownLatch的源码盘了个遍，这篇文章再接着谢谢，加深记忆
 

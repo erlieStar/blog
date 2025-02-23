@@ -5,16 +5,11 @@ lock: need
 ---
 
 # 并发原子类：都有了AtomicLong，为什么还要提供LongAdder？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210210213316468.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/876a75d51fe6cfd4c8461e1e873bfad2.jpeg)
 ## LongAdder相比AtomicLong有哪些优势？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/5ad59806db9b4e4084fa9a7b7cf1bd12.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/1f103d4a9b0ae5ec14394dbe70a130ba.png)
 上一节我们分享了原子类一些常用的工具类，除此之外还提供了另外4个原子类。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e4d54850e27d48819da380a38598890b.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fd320bc1a988a9439d2e3fd5efc102b6.png)
 这4个原子类和我们之前提到的原子类的设计思想不太一样，因此单开一节来分析
 
 ```java
@@ -30,15 +25,12 @@ lock: need
 ```
 
 可以看到使用方式差不多，但是LongAdder的性能比较高，因此阿里巴巴《Java开发手册》中也有如下建议
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210216124448743.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c28cb8a89cfeccea859230a088d5d213.png)
 **那么LongAdder是如何实现高性能的？**
 
 其实我们可以把对一个变量的cas操作，分摊到对多个变量的cas操作，这样就可以提高并发度，想获取最终的值时，只需要把多个变量的值加在一起即可。这就是LongAdder实现高并发的秘密
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f3d321fbd38d44879765289fb1704784.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/d15adef7e18b8d33f45086c319ce3890.png)
 除去LongAdder外，还新提供了一个类LongAccumulator。LongAccumulator比LongAdder的功能呢更强大
 
 LongAdder只能进行累加操作，并且初始值默认为0。而LongAccumulator可以自己定义一个二元操作符，并且可以传入一个初始值。
@@ -62,8 +54,7 @@ DoubleAccumulator的实现思路和LongAccumulator类似，只是多了一个二
 ## LongAdder如何实现高性能的？
 
 **LongAdder实现高并发的秘密就是用空间换时间，对一个值的cas操作，变成对多个值的cas操作，当获取数量的时候，对这多个值加和即可。**
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210216171555471.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e846165e9181f56a5c86df22dd9da4fd.png)
 
 具体到源码就是
 1. 先对base变量进行cas操作，cas成功后返回
@@ -95,7 +86,7 @@ public void add(long x) {
 }
 ```
 当数组不为空，并且根据线程hash值定位到数组某个下标中的元素不为空，对这个元素cas成功则直接返回，否则进入longAccumulate方法
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210216165012856.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/7ee9b4ed1f4e16602009909376f5f25a.jpeg)
 1. cell数组已经初始化完成，主要是在cell数组中放元素，对cell数组进行扩容等操作
 2. cell数组没有初始化，则对数组进行初始化
 3. cell数组正在初始化，这时其他线程利用cas对baseCount进行累加操作

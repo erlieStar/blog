@@ -5,9 +5,7 @@ lock: need
 ---
 
 # 并发工具类：ReadWriteLock是如何做到读读并行的？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210225220059396.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/b1e89d2f90727ef5909605c411cf027c.png)
 ## ReadWriteLock的特点
 当我们想保证并发安全的时候，我们可以使用ReentrantLock或者synchronized。这样就能做到写写互斥，读写互斥，读读互斥。
 
@@ -68,9 +66,7 @@ thread3 write unlock 1646210523367
 ```
 
 从上面的执行结果，**我们可以看到读锁和写锁互斥，但是读锁和读锁可以并行**
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/3946ce0f50f640f9a93d345d47ea507a.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/5b448f995467561ce71024522805a8e1.png)
 和ReentrantLock类似ReadWriteLock也分为公平锁和非公平锁。到现在估计你也能猜出来公平性和非公平性体现在哪了！
 ```java
 public ReentrantReadWriteLock(boolean fair) {
@@ -85,9 +81,7 @@ public ReentrantReadWriteLock(boolean fair) {
 **我们如何用一个变量来存储两种锁的状态呢？**
 
 在ReadWriteLock中是这样做的，state变量的高16位表示读锁的状态，低16位表示写锁的状态
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7c7f49984bc448fd8f42e676ca0d472c.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/3093ee077352e42f3d5c93a6068d23c9.png)
 ## 获取写锁
 鉴于写锁的实现比较简单，我们就先看写锁的实现，再看读锁的实现
 ```java

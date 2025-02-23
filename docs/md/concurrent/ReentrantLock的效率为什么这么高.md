@@ -5,8 +5,7 @@ lock: need
 ---
 
 # 并发工具类：ReentrantLock的效率为什么这么高？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210212223733508.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/b230f016aaeda52df76e6f641d4a7e59.jpeg)
 ## 手写一个锁
 说起ReentrantLock可能很多人都用过，也知道这个类的作用，可以用来保证线程安全。我们用synchronized也能保证线程安全啊，为什么还需要ReentrantLock呢？
 
@@ -71,7 +70,7 @@ public interface Lock {
 4. newCondition()：实现条件通知
 
 ## ReentrantLock底层实现
-![在这里插入图片描述](https://img-blog.csdnimg.cn/6c86580faf594bcca42c0a1439f597be.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/785bbfc9065379dd56f4071ca5843a23.png)
 
 Sync是ReentrantLock的一个成员变量，可以认为它是一个代理类，加解锁操作都由这个类来实现。继承自AbstractQueuedSynchronizer，它有2个子类FairSync用来实现公平锁，NonfairSync用来实现非公平锁
 
@@ -93,9 +92,9 @@ public ReentrantLock(boolean fair) {
 
 在源码中这个成员变量定义在Sync的父类AbstractQueuedSynchronizer中，state变量在不同子类中有不同的含义，在ReentrantLock中表示锁的状态
 
- - state的值表示加锁的次数，无锁时值为0，第一次加锁将state设置为1，由于ReentrantLock是可重入锁，当持有锁的线程是当前线程时，即可加锁，加锁一次，将state的值加1
- 
- - 每解锁一次将state的个数减1，当state的值为0，其他线程可以获得锁
+- state的值表示加锁的次数，无锁时值为0，第一次加锁将state设置为1，由于ReentrantLock是可重入锁，当持有锁的线程是当前线程时，即可加锁，加锁一次，将state的值加1
+
+- 每解锁一次将state的个数减1，当state的值为0，其他线程可以获得锁
 
 ### 不响应中断的非公平锁
 ```java
@@ -232,8 +231,8 @@ public final boolean hasQueuedPredecessors() {
 
 有两种情况会导致h的next为空
 
- 1. 当前线程进入hasQueuedPredecessors的同时，另一个线程已经更改了tail，但还没有将head的next指向tail
- 2. 当前线程将head赋给h后，head被另一个线程移除队列，导致h的next为空，这种情况说明锁已经被占用
+1. 当前线程进入hasQueuedPredecessors的同时，另一个线程已经更改了tail，但还没有将head的next指向tail
+2. 当前线程将head赋给h后，head被另一个线程移除队列，导致h的next为空，这种情况说明锁已经被占用
 
 ```java
 // AbstractQueuedSynchronizer#enq

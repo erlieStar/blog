@@ -5,8 +5,7 @@ lock: need
 ---
 
 # 并发容器：ThreadLocal为什么会内存泄漏？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200405103643111.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c50c24854a3e266b3a481a106ffc6414.jpeg)
 ## ThreadLocal有哪些作用？
 ThreadLocal主要有如下2个作用
 
@@ -49,7 +48,7 @@ public static void main(String[] args) {
     service.shutdown();
 }
 ```
-结果报异常了，因为部分线程获取的时间不对![在这里插入图片描述](https://img-blog.csdnimg.cn/20190601173342951.PNG?)
+结果报异常了，因为部分线程获取的时间不对![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/48f29c45ce26e78f48e776b514084e36.png)
 
 那么我们如何解决这个问题呢？
 
@@ -133,8 +132,7 @@ ThreadLocal就是通过给每个线程绑定一个指定类型的变量来实现
 
 在Thread类内部有用一个Map容器存变量。它的大概结构如下所示
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/3ed9f69ba0064f69a70a1471840363ea.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4d3c62bc078d8b615ea38330b47e3bfa.png)
 ThreadLocalMap是一个Map，key是ThreadLocal，value是Object
 
 映射到源码就是如下所示：
@@ -145,7 +143,7 @@ public class Thread implements Runnable {
     ThreadLocal.ThreadLocalMap threadLocals = null;
 }
 ```
-往ThreadLocalMap里面放值 
+往ThreadLocalMap里面放值
 ```java
 // ThreadLocal类里面的方法，将源码整合了一下
 public void set(T value) {
@@ -219,9 +217,7 @@ public class InfoUtil {
 }
 ```
 变量的结构如下图
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/57f0c5ce7a8e40669bf8a6e53046b5ec.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/8ff7b79efa1f049ad88db78f29b5ac3b.png)
 ## 在线程级别传递变量
 假设有如下一个场景，method1()调用method2()，method2()调用method3()，method3()调用method4()，method1()生成了一个变量想在method4()中使用，有如下2种解决办法
 
@@ -271,8 +267,7 @@ static class ThreadLocalMap {
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/185485c0b2134f77a526315864cf0a6b.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/01be3abccce50d766fd27d930ed4843b.png)
 **为了引出后面内存泄漏是如何发生的？我们先来回顾一下JDK中的四种引用类型**
 
 1. 强引用，直接new

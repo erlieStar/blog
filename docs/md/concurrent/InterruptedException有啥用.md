@@ -4,12 +4,9 @@ title: InterruptedException有啥用？
 lock: need
 ---
 # 并发理论：InterruptedException有啥用？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2e39cbf1a5de4033badca1cc1f6fb0a5.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/60761a498a496a1263b37599b1219884.jpeg)
 ## InterruptedException异常是如何来的？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/91f0e892fffa42b1a0736936c140db50.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/9afbd6bfcf648750ca49f0f4cd0e47b0.png)
 
 **当线程处于WAITING和TIMED_WAITING状态时，如果调用interrupt方法会抛出InterruptedException，让线程处于就绪状态**
 

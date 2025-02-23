@@ -5,22 +5,20 @@ lock: need
 ---
 
 # 并发工具类：AQS有哪些作用？（二）
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210210184602700.jpg?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e21d51750c4b9529e0da8ad6115f338c.jpeg)
 ## AQS封装的加锁和解锁方法
 
 AQS提供了独占锁和共享锁两种加锁方式，每种方式都有响应中断和不响应中断的区别，所以AQS的锁可以分为如下四类
 
- 1. 不响应中断的独占锁(acquire)
- 2. 响应中断的独占锁(acquireInterruptibly)
- 3. 不响应中断的共享锁(acquireShared)
- 4. 响应中断的共享锁(acquireSharedInterruptibly)
+1. 不响应中断的独占锁(acquire)
+2. 响应中断的独占锁(acquireInterruptibly)
+3. 不响应中断的共享锁(acquireShared)
+4. 响应中断的共享锁(acquireSharedInterruptibly)
 
 而释放锁的方式只有两种
 
- 1. 独占锁的释放(release)
- 2. 共享锁的释放(releaseShared)
+1. 独占锁的释放(release)
+2. 共享锁的释放(releaseShared)
 
 ## 独占锁的加锁
 我们前面在写入队的逻辑的时候，直接将Thread放到Queue中就完事了。看看Doug Lea是如何写的
@@ -49,12 +47,12 @@ public final void acquire(int arg) {
 }
 ```
 
- 1. 先尝试获取，如果获取到直接退出，否则进入2
- 2. 获取锁失败，以独占模式将线程包装成Node放到队列中
- 3. 如果放入的节点是队列的第二个节点，则再尝试获取锁，因为此时锁有可能释放类，不是第二个节点就不用尝试了，因为轮不到。如果获取到锁则将当前节点设为head节点，退出，否则进入4
- 4. 设置好闹钟后将自己阻塞
- 5. 线程被唤醒，重新竞争锁，获取锁成功，继续执行。如果线程发生过中断，则最后重置中断标志位位true，即执行selfInterrupt()方法
- 
+1. 先尝试获取，如果获取到直接退出，否则进入2
+2. 获取锁失败，以独占模式将线程包装成Node放到队列中
+3. 如果放入的节点是队列的第二个节点，则再尝试获取锁，因为此时锁有可能释放类，不是第二个节点就不用尝试了，因为轮不到。如果获取到锁则将当前节点设为head节点，退出，否则进入4
+4. 设置好闹钟后将自己阻塞
+5. 线程被唤醒，重新竞争锁，获取锁成功，继续执行。如果线程发生过中断，则最后重置中断标志位位true，即执行selfInterrupt()方法
+
 **从代码层面详细分析一波，走起**
 
 tryAcquire是让子类实现的
@@ -181,9 +179,7 @@ private final boolean parkAndCheckInterrupt() {
 ```
 
 最后用一个流程图来解释不响应中断的独占锁
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306122911269.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/29110870472eba4839ecdb9ae82bbac5.png)
 #### 入队过程中有异常该怎么办？
 **这部分内容比较难，看着吃力的小伙伴跳过即可，对主流程影响不大**
 
@@ -192,16 +188,13 @@ private final boolean parkAndCheckInterrupt() {
 **哪些地方执行发生异常会执行cancelAcquire?**
 
 可以看到调用cancelAcquire方法的有如下几个部分
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306123840151.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e7fab2bee62f816a8c090299d7dfecdf.png)
 **分析这些方法的调用，发现基本就是如下2个地方会发生异常**
 1. 尝试获取锁的方法如tryAcquire，这些一般是交给子类来实现的
 2. 当线程是被调用Thread#interrupt方法唤醒，如果要响应中断，会抛出InterruptedException
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306124357634.jpeg?)
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021030612441711.jpeg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/12214b3c2eb0afd908bde57a73b151a5.jpeg)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/6975a206ef0f907d3de3d2631ee5ea7c.jpeg)
 
 ```java
 //处理异常退出的node
@@ -247,21 +240,19 @@ private void cancelAcquire(Node node) {
 ```
 将node出队有如下三种情况
 
- 1. 当前节点是tail
- 2. 当前节点不是head的后继节点，也不是tail
- 3. 当前节点是head的后继节点
+1. 当前节点是tail
+2. 当前节点不是head的后继节点，也不是tail
+3. 当前节点是head的后继节点
 
 **当前节点是tail**
 
 compareAndSetTail，将tail指向pred
 compareAndSetNext，将pred的next指向null，也就是把当前节点移出队列
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306135617221.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fd8319bbf44ed50438ed833c0dfaca58.png)
 
 **当前节点不是head的后继节点，也不是tail**
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306141115430.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/8fb19d130384f476e78dae1bef555f8a.png)
 这里将node的前继节点的next指向了node的后继节点，即compareAndSetNext(pred, predNext, next)，**注意pred和node节点中间有可能有CANCELLED的节点，怕乱就没画出来**
 
 **当前节点是head的后继节点**
@@ -336,14 +327,12 @@ private Node addWaiter(Node mode) {
 }
 ```
 这其实和入队的逻辑有关系，假如Node1在图示位置挂起了，Node1后面又陆续增加了Node2和Node3，如果此时从前向后遍历会导致元素丢失，不能正确唤醒线程
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210306152559252.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c099b2b715f0a7849448cd3152804f30.png)
 ### 分析一下独占锁响应中断和不响应中断的区别
 我们之前说过独占锁可以响应中断，也可以不响应中断，调用的方法如下？
 
- 1. 不响应中断的独占锁(acquire)
- 2. 响应中断的独占锁(acquireInterruptibly)
+1. 不响应中断的独占锁(acquire)
+2. 响应中断的独占锁(acquireInterruptibly)
 
 所以我们只需要看这2个方法的区别在哪里就可以，我下面只列出有区别的部分哈。
 
@@ -368,13 +357,9 @@ public final void acquire(int arg) {
 **acquire在尝试获取锁的时候完全不管线程有没有被中断，而acquireInterruptibly在尝试获取锁之前会判断线程是否被中断，如果被中断，则直接抛出异常。**
 
 tryAcquire方法一样，所以我们只需要对比acquireQueued方法和doAcquireInterruptibly方法的区别即可
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210221161857598.jpeg?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/d1cf66dd812832bdc92b510650d35243.jpeg)
 **执行acquireQueued方法当线程发生中断时，只是将interrupted设置为true，并且调用selfInterrupt方法将中断标志位设置为true**
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210221161631157.jpeg?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/def83b2077f3dcb08adeb01b871f02cc.jpeg)
 **而执行doAcquireInterruptibly方法，当线程发生中断时，直接抛出异常。**
 
 最后看一下parkAndCheckInterrupt方法，这个方法中判断线程是否中断的逻辑特别巧！
@@ -463,9 +448,9 @@ public static void main(String[] args) {
 
 到这我们就能理解为什么要进行中断的复位了
 
- - 如果当前线程是非中断状态，则在执行park时被阻塞，返回中断状态false
- - 如果当前线程是中断状态，则park方法不起作用，返回中断状态true，interrupted将中断复位，变为false
- - 再次执行循环的时候，前一步已经在线程的中断状态进行了复位，则再次调用park方法时会阻塞
+- 如果当前线程是非中断状态，则在执行park时被阻塞，返回中断状态false
+- 如果当前线程是中断状态，则park方法不起作用，返回中断状态true，interrupted将中断复位，变为false
+- 再次执行循环的时候，前一步已经在线程的中断状态进行了复位，则再次调用park方法时会阻塞
 
 **所以这里要对中断进行复位，是为了不让循环一直执行，让当前线程进入阻塞状态，如果不进行复位，前一个线程在获取锁之后执行了很耗时的操作，那当前线程岂不是要一直执行死循环，造成CPU使用率飙升？**
 

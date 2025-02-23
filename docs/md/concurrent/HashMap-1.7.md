@@ -5,7 +5,7 @@ lock: need
 ---
 # 并发容器：HashMap（JDK1.7）
 
-![请添加图片描述](https://img-blog.csdnimg.cn/85078348853748debc006720de77092f.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/37ea34709f27cf782fa209f091c2449f.jpeg)
 
 ## HashMap实现
 在面试的时候，大家经常用HashMap来打开话题，可能是这个容器被频繁使用，比较重要吧
@@ -15,26 +15,22 @@ lock: need
 1. jdk1.7的HashMap是用数组+链表实现的
 2. jdk1.8的HashMap是用数组+链表+红黑树实现的
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/92aa19c2687d43608482006e3280f224.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/421ee65da07de643a9bdb41e895dfc9d.png)
 
 HashMap的主干是一个数组，假设我们有3个键值对dnf:1，cf:2，lol:3，每次放的时候会根据key.hash % table.length（对象的hashcode进行一些操作后对数组的长度取余）确定这个键值对应该放在数组的哪个位位置
 
 1 = indexFor(dnf)，我们将键值对放在数组下标为1的位置
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/8609a517776f41ec921f6abac518d1bf.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/9355164b94575af7be2518edf7ddaedf.png)
 
 3 = indexFor(cf)   
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a004fd2348594904b16bb87b34bbcb46.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/63ee385f0106702b62270f8cf0ec6096.png)
 
 1 = indexFor(lol)，这时发现数组下标为1的位置已经有值了，我们把lol:3放到链表的下一位
 
 jdk1.7是头插法
 
 jdk1.8是尾插法
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/461142229b7143e2ba4af49512c34c30.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/1fba5b7bd073a1a85f3ca89086f9980a.png)
 在获取key为lol的键值对时，1=hash(lol)，得到这个键值对在数组下标为1的位置，lol和dnf不相等，和下一个元素比较，相等返回。set和get的过程就是这么简单。先定位到槽的位置（即数组中的位置），再遍历链表找到相同的元素。
 
 由上图可以看出，HashMap在发生hash冲突的时候用的是链地址法，解决hash冲突并不只有这一种方法，常见的有如下四种方法
@@ -269,8 +265,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2b02738368314996ad7776ec4ccd1b4e.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/842112e1c836ec5d0fd6772ca90e1340.png)
 ### get方法的执行过程
 
 1. key为null直接从table[0]处取，对key的hashCode()做hash运算，计算index;
@@ -320,4 +315,4 @@ final Entry<K,V> getEntry(Object key) {
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a9eed078e1e64c158c70bc088bf77d10.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/720f0fec8141f091d9a66b2c990383cb.png)

@@ -4,9 +4,7 @@ title: CyclicBarrier，一不小心，锁就不能重用了
 lock: need
 ---
 # 并发工具：CyclicBarrier，一不小心，锁就不能重用了
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210304000534847.jpg?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/83487f1fde1681a2dc1f9f22690a18e3.jpeg)
 ## 用CyclicBarrier协调都地主
 斗地主是一个非常有意思的娱乐活动，但是斗地主必须够3个人才能开始，每次凑够3个人就能开一桌。我们该如何实现这个功能呢？
 
@@ -323,7 +321,7 @@ private void breakBarrier() {
 ```
 只有一个breakBarrier方法，所以调用breakBarrier的地方就是栅栏被冲破的地方，有如下5个地方
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210304234930747.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/33cd5c205ed2e66eaab4731e29b0e0de.png)
 1. 线程被中断
 2. 执行额外任务发生异常
 3. 发生中断唤醒线程时，当前栅栏没有被冲破

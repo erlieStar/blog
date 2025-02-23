@@ -5,8 +5,7 @@ lock: need
 ---
 
 # 并发容器：ConcurrentHashMap（JDK1.8）
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d5c918d2faac4fc78f6e8324daee533f.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c16402b540cb9de018da5d2fa55ae869.jpeg)
 ## JDK1.8源码
 ### put执行过程
 
@@ -170,9 +169,7 @@ else if ((fh = f.hash) == MOVED)
 每个线程区间的左右边界分别用i和bound记录，区间的长度用stride记录，下个线程转移时的右边界用transferIndex记录
 
 当所有的线程都完成rehash时，则整个rehash过程结束
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4513b32e701c4c9c9a4d1747cdb7782c.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/d942e55ce1d50d28d244da42129418ce.png)
 ```java
 private final void transfer(Node<K,V>[] tab, Node<K,V>[] nextTab) {
     // stride 可以理解为步长 单核模式下为 n，多核模式下为 (n >>> 3) / NCPU，步长最小为16
@@ -333,8 +330,7 @@ private final void transfer(Node<K,V>[] tab, Node<K,V>[] nextTab) {
 2. 正在迁移的hash槽，get请求正常访问桶上的链表或者红黑树，因为rehash是复制新节点到table，不是移动，put请求会被阻塞（迁移的时候会对槽加锁，put请求也需要对槽加锁）
 3. 完成迁移的hash槽，get请求到新table上获取元素（迁移完成的槽上的节点为ForwardingNode，通过ForwardingNode到新table上查询），put请求则帮助迁移
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/639edf5d06bb476f965fcc8d0063d36f.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/a0aaf5655fab9afae84ba0763be245bd.png)
 ### size方法
 计数和获取总数的思路和LongAdder的差不多，看我的LongAdder文章吧
 

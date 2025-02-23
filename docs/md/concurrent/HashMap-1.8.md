@@ -4,9 +4,7 @@ title: HashMap（JDK1.8）
 lock: need
 ---
 # 并发容器：HashMap（JDK1.8）
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/3054c895fa1c479b8ca464edafee716f.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4af3c133c576fdb1d2613b858fa971d6.jpeg)
 ## JDK1.8源码
 ### 构造函数
 
@@ -54,7 +52,7 @@ static final int hash(Object key) {
 
 putVal的代码长度比较长，我们先理一下整体思路，再看代码细节
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4ae6f7b8d2bd47d8a6ca25842245f895.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4bdca59626237bb76d3114f3af1d6f7d.png)
 
 数组没初始化则先初始化数组，没发生碰撞则直接放到bucket中。
 
@@ -91,7 +89,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 					// 插入新元素，可以看到是尾插法
 					p.next = newNode(hash, key, value, null);
 					// 链表长度 >= 8，并且数组长度 >= 64，链表转为红黑树
-                    // 否则扩容
+					// 否则扩容
 					if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
 						treeifyBin(tab, hash);
 					break;
@@ -121,6 +119,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 	return null;
 }
 ```
+
 **这里有个需要注意的点为**
 
 链表长度 >= 8，并且数组长度 >= 64，链表转为红黑树，否则扩容
@@ -212,8 +211,7 @@ final Node<K,V>[] resize() {
 ```
 在rehash的过程中，链表没有发生倒置
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b91075963a6342dda479321ecc89b88c.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/0aed28932aa47ae0ceb1e30f13d47eba.png)
 ### get执行过程
 
 1. 对key的hashcode()高16位和低16位进行异或运算求出具体的hash值
@@ -248,8 +246,7 @@ final Node<K,V> getNode(int hash, Object key) {
 	return null;
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/47c2972f2c504ddf9affdd3eea02131b.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c25692d562500e4da740b0a5ed0b1e27.png)
 ## 常见面试题
 ### HashMap，HashTable，ConcurrentHashMap之间的区别
 |对象     | key和value是否允许为空         | 是否线程安全| 
@@ -286,10 +283,10 @@ final Node<K,V> getNode(int hash, Object key) {
 
 ## JDK1.8发生了哪些变化？
 1. 由数组+链表改为数组+链表+红黑树，当链表的长度超过8时，链表变为红黑树。
-    1. **为什么要这么改？**
-       我们知道链表的查找效率为O(n)，而红黑树的查找效率为O（logn），查找效率变高了。
-    2. **为什么不直接用红黑树？**
-       因为红黑树的查找效率虽然变高了，但是插入效率变低了，如果从一开始就用红黑树并不合适。从概率学的角度选了一个合适的临界值为8
+   **为什么要这么改？**
+   我们知道链表的查找效率为O(n)，而红黑树的查找效率为O（logn），查找效率变高了。
+   **为什么不直接用红黑树？**
+   因为红黑树的查找效率虽然变高了，但是插入效率变低了，如果从一开始就用红黑树并不合适。从概率学的角度选了一个合适的临界值为8
 2. 优化了hash算法（高低16位异或操作）
 3. 计算元素在新数组中位置的算法发生了变化，index = hash & oldTable.length == 0 ? i : i + oldTable.length （i为元素在旧数组中的下标值）
 4. 头插法改为尾插法，扩容时链表没有发生倒置（避免形成死循环）
@@ -303,8 +300,7 @@ final Node<K,V> getNode(int hash, Object key) {
 **为什么多线程put会导致元素丢失？**
 
 我们结合代码来分析一下，假如说同时有2个线程往table[4]的地方放置元素，table[4]目前没有元素
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/658b2b5959c94f2c9af547c6fc1a183d.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/549a8316a83c1d98a2b80345153c9630.png)
 
 线程1执行完如下代码的第一行还没有执行第二行，CPU发生切换。接着线程2执行完如下2行代码，将key2的节点放到table[4]中，接着线程1执行第二行，将key1的节点放到table[4]中，这样就会造成key2的数据丢失
 ```java

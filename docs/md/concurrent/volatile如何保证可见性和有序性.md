@@ -5,13 +5,10 @@ lock: need
 ---
 
 # 并发关键字：volatile如何保证可见性和有序性？
-
-![请添加图片描述](https://img-blog.csdnimg.cn/f8011400c5034f3491de41f75d8705fd.png)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/baf10756ec4b19ad6e5273ffe8b49844.jpeg)
 ## Java内存模型
 在之前的文章中我们提到为了便于进行分析，Java中的内存模型被抽象为如下这种形式。这个内存模型对我们分析volatile关键字非常有用，所以再次提一下
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171010636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/42e2815335a5286f1f1e891eaa825325.png)
 ## volatile的作用是什么？
 **volatile可以保证可见性，有序性，但不能保证原子性**
 
@@ -20,12 +17,10 @@ lock: need
 **可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值**
 
 假如说有2个线程对一个变量data进行操作，线程先会把主内存中的值缓存到工作内存，这样做的原因和上面提到的高速缓存类似，提高效率
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171216554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/a322b8ddb6fa08078cc4c07a93f6858c.png)
 
 但是这样会引入新的问题，假如说线程A把data修改为1，线程A的工作内存data值为1，但是主内存和线程B的工作内存data值为0，此时就有可能出现Java并发编程中的可见性问题
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171308741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/f3034eafd505f7162a63b57d58db0e77.png)
 
 举个例子，如下面代码，线程A已经将flag的值改变，但是线程B并没有及时的感知到，导致一直进行死循环
 
@@ -81,8 +76,7 @@ threadB end
 3. 当线程B需要读取data变量的值时，先从工作内存中读，发现已经过期，就会从主内存中加载data变量的最新值了
 
 放个图理解的更清楚
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171858397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/75d0c710f1eb9574cf8c7734b28c600e.png)
 
 ### 有序性
 
@@ -96,9 +90,9 @@ flag = true;          //语句2
 ```
 上面代码定义了一个int型变量，定义了一个boolean类型变量，然后分别对两个变量进行赋值操作。从代码顺序上看，语句1是在语句2前面的，那么JVM在真正执行这段代码的时候会保证语句1一定会在语句2前面执行吗？不一定，为什么呢？这里可能会发生指令重排序（Instruction Reorder）。
 
-　　下面解释一下什么是指令重排序，一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。
+下面解释一下什么是指令重排序，一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。
 
-　　比如上面的代码中，语句1和语句2谁先执行对最终的程序结果并没有影响，那么就有可能在执行过程中，语句2先执行而语句1后执行。
+比如上面的代码中，语句1和语句2谁先执行对最终的程序结果并没有影响，那么就有可能在执行过程中，语句2先执行而语句1后执行。
 
 但是有依赖关系的语句不会进行重排序，如下面求圆面积的代码
 

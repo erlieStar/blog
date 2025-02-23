@@ -4,9 +4,7 @@ title: Synchronized底层实现，锁升级原理
 lock: need
 ---
 # 并发关键字：Synchronized底层实现，锁升级原理
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200209225801557.jpg?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/600c461957cbd05a06fd13ce8dbc79be.jpeg)
 ## synchronized使用方式
 我们知道并发编程会产生各种问题的源头是可见性，原子性，有序性。
 而synchronized能同时保证可见性，原子性，有序性。所以我们在解决并发问题的时候经常用synchronized，当然还有很多其他工具，如volatile。但是volatile只能保证可见性，有序性，不能保证原子性
@@ -64,11 +62,10 @@ public class SynchronizedDemo {
 ### Java对象组成
 我们都知道对象是放在堆内存中的，对象大致可以分为三个部分，分别是**对象头，实例变量和填充字节**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210212204438565.png?)
-
- - 对象头，**主要包括两部分1. Mark Word （标记字段），2.Klass Pointer（类型指针）**。Klass Point 是对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例（**即指向方法区类的模版信息**）。Mark Word用于存储对象自身的运行时数据
- - 实例变量，存放类的属性数据信息，包括父类的属性信息，这部分内存按4字节对齐
- - 填充数据，由于虚拟机要求对象起始地址必须是8字节的整数倍。**填充数据不是必须存在的，仅仅是为了字节对齐**
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/89884869622d90a612a57416ea3df609.png)
+- 对象头，**主要包括两部分1. Mark Word （标记字段），2.Klass Pointer（类型指针）**。Klass Point 是对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例（**即指向方法区类的模版信息**）。Mark Word用于存储对象自身的运行时数据
+- 实例变量，存放类的属性数据信息，包括父类的属性信息，这部分内存按4字节对齐
+- 填充数据，由于虚拟机要求对象起始地址必须是8字节的整数倍。**填充数据不是必须存在的，仅仅是为了字节对齐**
 
 
 假如有如下的类，a=100这个信息就存储在实例变量中
@@ -85,8 +82,7 @@ synchronized不论是修饰方法还是代码块，都是通过持有修饰对�
 
 由于对象头的信息是与对象自身定义的数据没有关系的额外存储成本，因此考虑到JVM的空间效率，Mark Word 被设计成为一个非固定的数据结构，以便存储更多有效的数据，它会根据对象本身的状态复用自己的存储空间，也就是说，Mark Word会随着程序的运行发生变化，变化状态如下 (32位虚拟机)：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200206225939472.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/0959fe2263fc46842bd2ad925643b48a.png)
 其中轻量级锁和偏向锁是Java 6 对 synchronized 锁进行优化后新增加的，稍后我们会简要分析。这里我们主要分析一下重量级锁也就是通常说synchronized的对象锁，锁标识位为10，其中指针指向的是monitor对象（也称为管程或监视器锁）的起始地址。每个对象都存在着一个 monitor 与之关联。在Java虚拟机(HotSpot)中，monitor是由ObjectMonitor实现的，其主要数据结构如下（位于HotSpot虚拟机源码ObjectMonitor.hpp文件，C++实现的），省略部分属性
 
 ```java
@@ -99,8 +95,7 @@ ObjectMonitor() {
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200206232455228.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/388ddf337e6132011711d20ec14a416d.png)
 结合线程状态解释一下执行过程。(状态装换参考自《深入理解Java虚拟机》)
 
 1. 新建（New），新建后尚未启动的线程
@@ -109,8 +104,7 @@ ObjectMonitor() {
 4. 限期等待（Timed Waiting），不会被分配CPU执行时间，不过无需等待其他线程显示的唤醒，在一定时间之后会由系统自动唤醒。例如调用Thread.sleep()方法
 5. 阻塞（Blocked），线程被阻塞了，“阻塞状态”与“等待状态”的区别是：“阻塞状态”在等待获取着一个排他锁，这个事件将在另外一个线程放弃这个锁的时候发生，而“等待状态”则是在等待一段时间，或者唤醒动作的发生。在程序等待进入同步区域的时候，线程将进入这种状态
 6. 结束（Terminated）：线程结束执行
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200209095306245.png)
+   ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/2ed2d7d7779997e00dd6cf1661e3231d.png)
 
 对于一个synchronized修饰的方法(代码块)来说：
 
@@ -273,9 +267,7 @@ synchronized锁有四种状态，无锁，偏向锁，轻量级锁，重量级�
 但是如果自旋的时间太长也不行，因为自旋是要消耗CPU的，因此自旋的次数是有限制的，比如10次或者100次，**如果自旋次数到了线程1还没有释放锁，或者线程1还在执行，线程2还在自旋等待，这时又有一个线程3过来竞争这个锁对象，那么这个时候轻量级锁就会膨胀为重量级锁。重量级锁把除了拥有锁的线程都阻塞，防止CPU空转。**
 
 ### 几种锁的优缺点
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200209103510228.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/65e7fe83d1fc4f583639db7b3564bd5b.png)
 ## 用锁的最佳实践
 **错误的加锁姿势1**
 
