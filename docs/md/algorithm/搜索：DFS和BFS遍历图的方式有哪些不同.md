@@ -1,5 +1,5 @@
 # 搜索：DFS和BFS遍历图的方式有哪些不同？
-![请添加图片描述](https://img-blog.csdnimg.cn/28bbf5911c7b43a48781328af02c3180.jpg?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/47088907217938a7054175952d211378.jpeg)
 ## 应用场景
 **DFS和BFS都是对图进行遍历的算法（树的图的一种），二者的区别只是对图遍历的策略不同**
 
@@ -12,7 +12,7 @@ BFS：从起点开始，依次对周边的节点进行遍历，遍历完再对�
 
 ### BFS遍历图示
 
-![请添加图片描述](https://img-blog.csdnimg.cn/f5b983377f6a480c85ade8581fa2fc40.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/4f26ef72fa9a6bd6cea619a91e00e35a.png)
 **开始第一次遍历**
 
 从（0，0）节点开始
@@ -54,7 +54,7 @@ while (!queue.isEmpty()) {
 1. 创建一个visit数组，如果对应座标的值为1，说明节点已经被遍历。如果对应座标的值为0，说明节点没有被遍历
 2. 可以直接利用题目中的条件，假如题目中用1表示这个节点不能被经过，0可以经过。我们遍历的时候就可以将经过的节点重置为1
 ### DFS遍历图示
-![请添加图片描述](https://img-blog.csdnimg.cn/e697e433435f43c8b387a5e95593eb3c.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/d17a330bc4d941e6fbb21b50acbf505f.png)
 
 从（0，0）节点开始
 向上遍历为（-1，0），出界了，不用遍历。
@@ -98,7 +98,7 @@ while (!queue.isEmpty()) {
 路径中所有相邻的单元格应当在 8 个方向之一 上连通（即，相邻两单元之间彼此不同且共享一条边或者一个角）。
 畅通路径的长度 是该路径途经的单元格总数。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f8448e0ea24349ca87d7a4c48bcaf5be.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fd6a5be48ff4610be4f97f6f46660445.png)
 ```java
 输入：grid = [[0,0,0],[1,1,0],[1,1,0]]
 输出：4
@@ -303,13 +303,10 @@ class Solution {
 给你一个装满水的6升的杯子，空的3升的杯子和1升的杯子，3个杯子都没有刻度。在不使用其他道具的情况下能否量出4升的水呢？
 
 相信大家小时候都玩过类似的有游戏，我们经常要绞尽脑汁想半天，其实这种题本质上是对图的一种遍历过程，我们写一个BFS或者DFS就能得出所有的解法
-
-![请添加图片描述](https://img-blog.csdnimg.cn/dce4942064e74295b79647c9006cd556.png?)
-
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/abe52aa2c55750149674b7d827001ab0.png)
 如上图(6, 0, 0) -> (3, 3, 0) -> (3, 2, 1) -> (4, 2, 0)就是一种解法
 
-![请添加图片描述](https://img-blog.csdnimg.cn/5eb0119af9484e798f61cf5d839e3434.png?)
-
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/c3291bcc1f4fa0e5f22bc54c22bb3abb.png)
 以后你再遇到类似的问题，例如有一个S升的可乐，和2个M升和N升的杯子，问如何将可乐平分倒进杯子中，是不是立马就知道该怎么做了？
 ### 打开转盘锁
 题目地址：LeetCode 752. 打开转盘锁

@@ -5,8 +5,6 @@ title: 目录
 
 [Github Pages](https://erliestar.github.io/blog/)
 
-[Gitee Pages（国内访问较快）](https://erliestar.gitee.io/blog/)
-
 # 导读
 
 [算法](/md/algorithm/开篇：拒绝盲目刷题，如何更高效的学习算法.md)

@@ -1,5 +1,5 @@
 # 堆：求解 TopK
-![请添加图片描述](https://img-blog.csdnimg.cn/c1c999cb7549441ebda4e38e86a20f54.jpg?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/32e3e56f277649b4b17b8d1236cccceb.jpeg)
 ## 堆
 堆是一种数据结构，需要满足如下几个特性
 1. 堆是一颗完全二叉树（生成节点的顺序是从左往右，从上往下依次进行）
@@ -7,11 +7,11 @@
 
 **将根结点最大的堆叫做最大堆或大根堆，根结点最小的堆叫做最小堆或小根堆**
 
-![请添加图片描述](https://img-blog.csdnimg.cn/3aae3c5cb27040878df98eab1b4ddeb4.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/54eba6130a84fa3371621aa494fce846.png)
 
 大根堆和小根堆如下图所示
 
-![请添加图片描述](https://img-blog.csdnimg.cn/aae9e3f5a5b84720b281887f64b02d34.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/683f750fdbb94f179a5e12ab1cdde223.png)
 
 大部分语言都会内置堆的实现，即优先级队列（Java中为PriorityQueue），所以当我们有用到堆的场景时，直接用PriorityQueue即可
 
@@ -47,7 +47,7 @@ while (!queue.isEmpty()) {
 ### 数组中的第K个最大元素
 题目地址：LeetCode 215
 题目描述：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/3e128d0e4f4e4ff4ae467a4e8f9db377.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e8aa286dd02a0ee22eb3ddcdaa193b43.png)
 
 维护一个小顶堆，数量不足 k 个时，一直往堆中存放元素，超过 k 个时，删除堆中最大的元素
 ```java
@@ -178,7 +178,7 @@ public int[] getLeastNumbers(int[] arr, int k) {
 ```
 ### 前 K 个高频元素
 题目描述：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/direct/fca8fe7617c94e089f44096da4d0c818.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/649f87a0e732668b8356d61fe79dca49.png)
 题目地址：LeetCode 347
 
 ```java
