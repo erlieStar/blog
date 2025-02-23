@@ -5,8 +5,7 @@ lock: need
 ---
 
 # Spring IOC源码解析：@Resource和@Autowired有啥区别？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210329213951423.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/cd4dea06517f5b06f95ac012c5137a5a.jpeg)
 ## 属性赋值
 在面试的时候，我们经常被问@Autowired，@Resource有什么区别？今天我们就仔细盘一下这个问题
 
@@ -23,14 +22,14 @@ InstantiationAwareBeanPostProcessor#postProcessProperties（利用缓存下来�
 方法上的@Autowired，@Value，@Inject被解析为AutowiredMethodElement
 @Resource被解析为ResourceElement
 
-![请添加图片描述](https://img-blog.csdnimg.cn/db06857446d5484dae1fd07feba2d4af.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/3473e9ef06e3d09acedc70d51afc797b.png)
 **属性赋值的时候只需要调用对应Element的inject方法即可**
 
 源码等我后续有时间再详细写写
 ## 自动注入（Autowiring）模式
 在之前的文章中我们说过AutowireCapableBeanFactory提供了创建Bean以及属性注入的功能。
 在这个接口中定义了4种注入的方式。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/433d0efa71a14507807480d863ff039d.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/22f29f881fec544da1aa6df4dc6b0a37.png)
 | 方式 | 说明 |
 |--|--|
 | no | 默认值，未激活 Autowiring，需要手动执行依赖注入对象|

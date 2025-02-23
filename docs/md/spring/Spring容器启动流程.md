@@ -5,7 +5,7 @@ lock: need
 ---
 
 # Spring IOC源码解析：Spring容器启动流程
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210317224843860.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/39a8e3a839458f1e2843d827b9c186ac.jpeg)
 ## 基本概念
 本篇文章是我们Spring源码专栏的第一篇，这个专栏我不会分享那些比较基础的知识点，比如ioc aop的好处之类的，这些内容写的人也比较多，你可以看一下其他博主的文章，这个专栏我会尽量挑干货来分享
 
@@ -18,7 +18,7 @@ lock: need
 **BeanDefinitionReader**
 BeanDefinitionReader会将配置的bean解析成为BeanDefinition，Spring Bean的配置方式有很多种，如XML，properties，groovy，注解（可能通过properties，groovy的方式你不常用，但Spring确实支持这种方式），所以BeanDefinitionReader的实现类也很多
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210330111959746.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/bf324e9e2997840b19a17c04ccac8fb6.png)
 
 **ClassPathBeanDefinitionScanner**
 当把Bean配置出后，得需要相应的组件把他们从资源文件中扫描出来，这个组件就是ClassPathBeanDefinitionScanner
@@ -29,18 +29,17 @@ BeanDefinitionReader将配置的bean解析成为BeanDefinition，需要将BeanDe
 **BeanFactory**
 BeanFactory会根据BeanDefinition将Bean生产出来
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fa18ff5a13f54bc289b9a4a624ffbd48.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/dadab632e9d4de96c61043ec2f7dd967.png)
 一些比较重要的BeanFactory如图所示。**可能你比较纳闷，为什么有的容器的类名后缀为BeanFactory，有的则为ApplicationContext？** 这其实是一个很常见的面试
 
 1. BeanFactory是一个最基础的IOC容器，提供了依赖查找，依赖注入等基础的功能
 2. ApplicationContext继承了BeanFactory，在BeanFactory的基础上增加了企业级的功能，如AOP，资源管理（Resources）事件（Event），国际化（i18n），Environment抽象等
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/17064e8a5e7a4a5f9caa4b4b37b6bcb7.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/25480ad125ca13ba251b93c31d7d40a8.png)
 从接口的定义上你就可以看出来，我们一般在开发的时候也都是用ApplicationContext，而且大多继承自GenericApplicationContext
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/6de8599f0e114ec5b4e18c155a848af7.png)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/331d58d6852c4b8e8b70bbe7500ff92f.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/cf1331ede383c50fa16f10f820c1d378.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/d832b7cf5c02b3794dbc18f83e13c2f2.png)
 **GenericApplicationContext本身就是一个BeanFactory，但是它却把对Bean的一些基本操作委托给DefaultListableBeanFactory，典型的代理模式**
 
 因为GenericApplicationContext是最常用的ApplicationContext，它将对Bean的基本操作委托给DefaultListableBeanFactory，所以在大部分应用下对Bean的操作都是由DefaultListableBeanFactory来完成的
@@ -96,7 +95,7 @@ public class Main {
 可以看到当AnnotationConfigApplicationContext被new出来的时候，容器已经启动完毕，后续就可以直接从容器中获取Bean了。
 
 构造函数主要执行了如下3个步骤，其中this和register方法主要是容器初始化的过程。refresh是刷新容器，即启动的过程，在这个里面做了很多操作，我们后面会用一个小节来分析
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210330144835601.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/005f7004fbfc7ecfa0872412f3c12c30.png)
 
 **需要注意的一点是，在容器初始化的过程中注册了6个Bean**
 1. ConfigurationClassPostProcessor（**实现了BeanFactoryPostProcessor，处理@Configuration，@ComponmentScan等注解，这是一个很重要的类**）
@@ -128,7 +127,7 @@ public class Main {
 10. BeanFactory初始化完成阶段
 11. Spring应用上下文启动完成阶段
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021052700213626.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fb36bc755a3c1a5e79b27476a421e3cc.png)
 
 ## Spring应用上下文启动准备阶段
 AbstractApplicationContext#prepareRefresh
@@ -201,7 +200,7 @@ AbstractApplicationContext#invokeBeanFactoryPostProcessors
 7. **注册BeanPostProcessor（ApplicationListenerDetector）**
 
 **此时注册到容器中的BeanPostProcessor有如下6个（注册的时机我都在前文标注过了）**，这6个BeanPostProcessor在Spring Bean的生命周期中起着重要的作用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210322232429517.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/99c1cbc8a80e175c78c29159464ddb87.png)
 ## 初始化内建Bean：MessageSource
 AbstractApplicationContext#initMessageSource
 国际化相关的内容，不怎么用，不研究了

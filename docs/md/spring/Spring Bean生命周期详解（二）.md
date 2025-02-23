@@ -5,7 +5,7 @@ lock: need
 ---
 
 # Spring Bean生命周期详解（二）
-![请添加图片描述](https://img-blog.csdnimg.cn/7b680b067e224616a10f9bc254d8a7eb.png?)
+![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/b77a4a5f321109af2adf4cb8135d9aef.jpeg)
 ## BeanFactoryPostProcessor和BeanPostProcessor
 在上一节我们对Bean的生命周期有了一个大概的了解，但是跳过了BeanPostProcessor的执行部分，本节我们就只分析BeanPostProcessor的执行部分。并且完善我们之前画的流程图。
 
@@ -14,11 +14,12 @@ lock: need
 2. 实现BeanPostProcessor接口（对Bean的生成过程进行扩展）
 
 BeanPostProcessor相关接口的继承关系如下（说实话，单看这个uml类图，都能说出Spring Bean生命周期的大概阶段）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e128c78596ef4fb6b6800993143b9fc8.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/56f2291d9a9a837bc211a7caa65a7b7f.png)
 BeanFactoryPostProcessor的子接口只有一个BeanDefinitionRegistryPostProcessor
-![在这里插入图片描述](https://img-blog.csdnimg.cn/1a75ea5a98784a8caa3288ca7fe027e3.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/90739722f183f3cd798f7a50fe7af963.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4983f6a9eb646e3d5f4f5fe6d73de008.png)
 利用BeanFactoryPostProcessor接口可以获取到BeanFactory，这样可以对工厂进行扩展
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c30a6cb744c64a55bca4e54f3fae581a.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/53590f3c45caa4b9c4ffdcf8ea5f7ed7.png)
 利用BeanDefinitionRegistryPostProcessor接口你就可以往BeanDefinitionRegistry中增加Bean定义或者删除Bean定义
 
 BeanPostProcessor接口的使用我会在文章最后写一个Demo，先演示一下BeanFactoryPostProcessor接口的作用，对BeanFactory进行扩展
@@ -46,8 +47,7 @@ System.out.println(animal1 == animal2);
 
 **这个例子就充分体现了BeanFactoryPostProcessor方法需要排序调用的重要性了，按照之前的排序规则ConfigurationClassPostProcessor类的调用时机会早于MyBeanFactoryPostProcessor，此时Bean已经都注入到容器中了，所以能将所有Bean的作用域修改为prototype，如果先执行MyBeanFactoryPostProcessor后执行ConfigurationClassPostProcessor，那只会修改部分Bean的作用域为prototype。这样你用起来估计都会懵逼**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210527005222400.png?)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/33029a9bf2c3f5cb2285afabac3011ad.png)
 **BeanPostProcessor接口可以对Bean生命周期中的很多部分进行扩展，并且Spring容器中有很多内建的BeanPostProcessor对Spring Bean的功能进行支持。搞懂了Spring内置的BeanPostProcessor的功能，基本上就把Spring Bean的生命周期搞懂了**。其余的如事件，国际化，资源管理在此基础上就很容易理解了
 
 
@@ -64,7 +64,7 @@ System.out.println(animal1 == animal2);
 
 1. BeanFactoryPostProcessor的执行在BeanFactory后置处理阶段
 2. BeanPostProcessor的执行在BeanFactory初始化完成阶段（初始化非延迟单例Bean）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021052700213626.png?)
+   ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fb36bc755a3c1a5e79b27476a421e3cc.png)
 
 ## Spring Bean生命周期
 ### BeanDefinition解析阶段
@@ -87,7 +87,7 @@ BeanDefinition的一些元信息如下
 
 
 ### BeanDefinition注册阶段
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2021031215280990.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/f89a3ba796ec8abe1c4d9d21d2469e92.png)
 
 配置被解析成BeanDefinition后，会被注册到BeanDefinitionRegistry
 
@@ -133,18 +133,18 @@ Student(super=User(id=1, name=zhang), age=10, description=xml)
 
 我启动的容器是ApplicationContext，因为BeanPostProcessor在Bean的生命周期中起了重要的作用，我们就直接来看一下容器启动后，注册了多少BeanPostProcessor
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210314195526777.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/cdfa091f6d52565f391f28139deaf86c.png)
 **可以看到注册了6个BeanPostProcessor，后面分析Bean的生命周期的时候，我会把每个BeanPostProcessor所起的作用标记出来**
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fb94a0c5223643a3b516483be113d0de.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ed96ae6874eab09ba2355b0609f875c1.png)
 为了方便大家调试，我把Spring Bean生命周期的时序图画了出来，大家可以对着图debug代码，这样理解的更深
 ### Bean 实例化前阶段
-![在这里插入图片描述](https://img-blog.csdnimg.cn/593696e5dcfc4a93900a8f2f7e13fee0.png?)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/de6fe086318f4b89b63c87d290398a5c.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/39ff416b8e0b9890e755f23845d36b31.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4557a91fc3cef58c88e101e7a98c34fd.png)
 实例化前会执行如下方法
 
- **InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation**
- **返回不为空，说明bean已经在这个方法中创建好了，不需要再进行后续的处理了，接着直接跳到初始化后阶段**
+**InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation**
+**返回不为空，说明bean已经在这个方法中创建好了，不需要再进行后续的处理了，接着直接跳到初始化后阶段**
 
 **生效类**
 CommonAnnotationBeanPostProcessor#postProcessBeforeInstantiation：return null，所以正常情况下都会进行后续的流程
@@ -195,7 +195,7 @@ InstantiationAwareBeanPostProcessorAdapter#getEarlyBeanReference
 org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#getEarlyBeanReference
 
 ### Bean 属性赋值前阶段
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e2e033f98b7047a8bd12a64196b0fa18.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/eddb3e12c099853fd5aa0b628e1a1c6e.png)
 **InstantiationAwareBeanPostProcessor#postProcessAfterInstantiation**
 对象已经被实例化，该实例的属性还未被设置，都是null。
 **该方法返回false，会忽略属性值的设置。返回true，会按正常流程设置属性值**
@@ -260,9 +260,9 @@ org.springframework.context.support.ApplicationContextAwareProcessor#invokeAware
 
 当容器是ApplicationContext时，会在启动的时候增加一个BeanPostProcessor，即ApplicationContextAwareProcessor，当调用ApplicationContextAwareProcessor#postProcessBeforeInitialization方法的时候，会回掉其余Aware接口的实现
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210313193619600.jpeg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/2bc91216a606a85c6d3d06f926940bb0.jpeg)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210313193631403.jpeg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/6c4312922696e843ef24affeba087fb3.jpeg)
 
 ### Bean 初始化前阶段
 **BeanPostProcessor#postProcessBeforeInitialization**
@@ -306,7 +306,7 @@ CommonAnnotationBeanPostProcessor#postProcessBeforeInstantiation：在父类Init
 org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory#applyBeanPostProcessorsAfterInitialization
 ### Bean 初始化完成阶段
 DefaultListableBeanFactory#preInstantiateSingletons
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7b6eb80600ac4d4bb99f075fdbcbe418.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/69b2a23e1f786b244207697ea430ad1f.png)
 
 SmartInitializingSingleton#afterSingletonsInstantiated
 启动阶段，初始化所有非延迟单例Bean完成后，会回调这个方法，只会回调一次
@@ -339,7 +339,7 @@ org.springframework.beans.factory.support.DisposableBeanAdapter#destroy
 可以看到在整个Bean的生命周期中，各种BeanPostProcessor起了非常重要的作用，搞懂了这些BeanPostProcessor的实现，基本上就搞懂了Spring Bean的生命周期
 
 最后总结一波流程图
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210527165808994.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e4e8bf6a5bca064778d51dfaf2cc6cac.png)
 ## 演示
 因为在Bean的生命周期中如下2个方法都有分支，我就演示一下这2个方法把
 InstantiationAwareBeanPostProcessor#postProcessBeforeInstantiation
