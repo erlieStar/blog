@@ -97,10 +97,6 @@ module.exports = {
                         text: '分布式',
                         items: [
                             {
-                                text: '系统设计',
-                                link: '/md/seata/01.seata和spring是如何整合的.md'
-                            },
-                            {
                                 text: '分布式事务',
                                 link: '/md/transaction/01.7种常见解决方案汇总.md'
                             },
