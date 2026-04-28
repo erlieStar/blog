@@ -285,7 +285,7 @@ HttpServletBean#init
 
 当配置父子容器的时候还是比较容易踩坑的，比如在子容器中配置了Bean A，在父容器中配置了Bean B，Bean B使用自动注入依赖了Bean A，此时因为父容器无法查找子容器的Bean，就会抛出找不到Bean A的异常。
 
-可能觉得父子容器这种设计并不是特别好，所以在Spirng MVC用JavaConfig的方式配置时或者用Spirng Boot开发时，都只存在单一的ApplicationContext
+可能觉得父子容器这种设计并不是特别好，所以在Spring MVC用JavaConfig的方式配置时或者用Spring Boot开发时，都只存在单一的ApplicationContext
 ## 基于JavaConfig配置的容器启动过程
 Servlet3.0以后出了新规范，Servlet容器容器在启动的时候需要回调javax.servlet.ServletContainerInitializer接口的onStartup方法，方法的实现类放在META-IN/services/javax.servlet.ServletContainerInitializer文件中，典型的spi代码
 

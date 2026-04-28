@@ -1,15 +1,15 @@
 ---
 layout: post
-title: 基于Servlet手写一个Spirng MVC
+title: 基于Servlet手写一个Spring MVC
 lock: need
 ---
 
-# Spring MVC源码解析：基于Servlet手写一个Spirng MVC
+# Spring MVC源码解析：基于Servlet手写一个Spring MVC
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210403141724297.jpg?)
 ## Spring MVC执行流程
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2b23dceb08fd43f881291dc860a9fec0.png?)
 
-Spirng MVC的执行流程是一个非常重要的知识点，它可以让我们很清楚的了解Spring MVC是如何工作的，后面我们会通过源码的方式整个流程以及涉及到的组件。再开始分析之前，我打算基于Servlet手写一个Spirng MVC，这样你就能明白大概的执行流程，不至于在看源码的时候太晕。
+Spring MVC的执行流程是一个非常重要的知识点，它可以让我们很清楚的了解Spring MVC是如何工作的，后面我们会通过源码的方式整个流程以及涉及到的组件。再开始分析之前，我打算基于Servlet手写一个Spring MVC，这样你就能明白大概的执行流程，不至于在看源码的时候太晕。
 
 ## 定义注解
 

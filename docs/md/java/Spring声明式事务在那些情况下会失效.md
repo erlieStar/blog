@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Spring声明式事务在那些情况下会失效？
+title: Spring声明式事务在哪些情况下会失效？
 lock: need
 ---
 
-# 面试官：Spring声明式事务在那些情况下会失效？
+# 面试官：Spring声明式事务在哪些情况下会失效？
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210411164521872.jpg?)
 ## 编程式事务
 在Spring中事务管理的方式有两种，编程式事务和声明式事务。先详细介绍一下两种事务的实现方式

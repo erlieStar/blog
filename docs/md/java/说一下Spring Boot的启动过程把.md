@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 说一下Spring Boot的启动过程把！
+title: 说一下Spring Boot的启动过程吧！
 lock: need
 ---
 
-# 面试官：说一下Spring Boot的启动过程把！
+# 面试官：说一下Spring Boot的启动过程吧！
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325182719144.jpg?)
 ## 介绍
 Spring Boot相对于Spring在启动流程上来说并没有太大的区别，只是借助于SpringApplication将启动过程模版化了，并在其中增加了批量注册，自动装配的功能，并开放了一系列的扩展点
