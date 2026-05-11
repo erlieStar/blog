@@ -43,6 +43,9 @@ module.exports = {
                         text: '导读', link: '/md/other/guide.md'
                     },
                     {
+                        text: 'AI', link: '/md/ai/claude code 使用教程.md'
+                    },
+                    {
                         text: '算法', link: '/md/algorithm/开篇：拒绝盲目刷题，如何更高效的学习算法.md'
                     },
                     {
@@ -137,7 +140,8 @@ module.exports = {
                     "/md/redis/": redis(),
                     "/md/mysql/": mysql(),
                     "/md/elasticsearch/": elasticsearch(),
-                    "/md/kafka/": kafka()
+                    "/md/kafka/": kafka(),
+                    "/md/ai/": ai()
                 }
             }
         }
@@ -714,6 +718,21 @@ function kafka() {
                 "Kafka消息发送.md",
                 "Kafka消息消费.md",
                 "Kafka线上问题.md"
+            ],
+        }
+    ]
+}
+
+function ai() {
+    return [
+        {
+            title: "AI",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "claude code 使用教程.md",
+                "mcp指南.md",
+                "agent skill 从原理到实战.md"
             ],
         }
     ]
