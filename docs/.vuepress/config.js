@@ -591,7 +591,7 @@ function rocketmq() {
             sidebarDepth: 0,
             children: [
                 "消息发送和消费核心流程汇总.md",
-                "消息消费异常如何排查.md"
+                "消息丢失如何排查.md"
             ]
         },
         {

@@ -6,6 +6,7 @@ title: 目录
 [Github Pages](https://erliestar.github.io/blog/)
 
 # 导读
+[AI](/md/ai/claude%20code%20使用教程.md)
 
 [算法](/md/algorithm/开篇：拒绝盲目刷题，如何更高效的学习算法.md)
 
