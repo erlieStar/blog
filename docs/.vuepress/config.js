@@ -709,15 +709,23 @@ function elasticsearch() {
 function kafka() {
     return [
         {
-            title: "Kafka",
+            title: "Kafka架构",
             collapsable: false,
             sidebarDepth: 0,
             children: [
                 "Kafka集群搭建.md",
-                "Kafka消息存储.md",
                 "Kafka消息发送.md",
+                "Kafka消息存储.md",
                 "Kafka消息消费.md",
                 "Kafka线上问题.md"
+            ],
+        },
+        {
+            title: "Kafka面试",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "Kafka集群搭建.md",
             ],
         }
     ]
