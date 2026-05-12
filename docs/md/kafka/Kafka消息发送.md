@@ -1,6 +1,5 @@
 # Kafka 消息发送
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/635da81e8eaf4300b227fb346d5bc18e.png)
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/e60760540b483a9d83b3c92fbef8aa26.png)
 ## 消息发送流程
 我们通过创建 KafkaProducer 对象来发送消息，KafkaProducer有两个线程
