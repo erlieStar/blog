@@ -6,32 +6,33 @@ lock: need
 
 # 面试官：volatile关键字用过吧？说一下作用和实现吧
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200901235208896.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/a3082fc270ae7dda9ec2ec4a06aa7957.png)
 ## 极简计算机发展史
 我们知道，计算机CPU和内存的交互是最频繁的，内存是我们的高速缓存区。而刚开始用户磁盘和CPU进行交互，CPU运转速度越来越快，磁盘远远跟不上CPU的读写速度，才设计了内存，但是随着CPU的发展，内存的读写速度也远远跟不上CPU的读写速度，因此，为了解决这一纠纷，CPU厂商在每颗CPU上加入了高速缓存，用来缓解这种症状，因此，现在CPU同内存交互就变成了下面的样子。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112132234602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/9e87c20007fc08b8ffda1cdf7fd21ed2.png)
 
 单核CPU的性能不可能无限制的增长，要想很多的提升新能，需要多个处理器协同工作。 基于高速缓存的存储交互很好的解决了处理器与内存之间的矛盾，也引入了新的问题：缓存一致性问题。在多处理器系统中，每个处理器有自己的高速缓存，而他们又共享同一块内存（下文成主存，main memory 主要内存），当多个处理器运算都涉及到同一块内存区域的时候，就有可能发生缓存不一致的现象。为了解决这一问题，需要各个处理器运行时都遵循一些协议，在运行时需要用这些协议保证数据的一致性。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112133820448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/593fd1cf1a39242705f0f53f9fe9316f.png)
 
 缓存一致性协议中最出名的就是Intel 的MESI协议，MESI协议保证了每个缓存中使用的共享变量的副本是一致的。它核心的思想是：当CPU写数据时，如果发现操作的变量是共享变量，即在其他CPU中也存在该变量的副本，会发出信号通知其他CPU将该变量的缓存设置为无效状态，因此当其他CPU需要读取这个变量时，发现自己缓存中该变量是无效状态，那么它就会从内存重新读取
 
 ## Java内存模型
 Java的内存模型和上面的结构还是挺相似的，此时在看工作内存和主内存关系，从逻辑上，高速缓存对应工作内存，每个线程分配到CPU时间片时，独自享有高速缓存的使用能力。主内存对应存储的物理内存。特别注意，这只是逻辑上的对等关系，物理的上具体对应关系十分复杂，这里不讨论。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171010636.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/42e2815335a5286f1f1e891eaa825325.png)
 ## volatile的作用是什么？
-volatile可以保证可见性，有序性，但不能保证原子性
+**volatile可以保证可见性，部分保证有序性（禁止指令重排序），但不能保证原子性**
 
-**可见性**
+volatile 可以保证有序性，但只保证与 volatile 变量相关的有序性。底层通过内存屏障（Memory Barrier）禁止特定的指令重排序，并基于 happens-before 规则实现：一个线程对 volatile 变量的写，先行发生于另一个线程对该变量的读
+### 可见性
 
 **可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值**
 
 假如说有2个线程对一个变量data进行操作，线程先会把主内存中的值缓存到工作内存，这样做的原因和上面提到的高速缓存类似，提高效率
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171216554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/a322b8ddb6fa08078cc4c07a93f6858c.png)
 
 但是这样会引入新的问题，假如说线程A把data修改为1，线程A的工作内存data值为1，但是主内存和线程B的工作内存data值为0，此时就有可能出现Java并发编程中的可见性问题
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171308741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/f3034eafd505f7162a63b57d58db0e77.png)
 
 举个例子，如下面代码，线程A已经将flag的值改变，但是线程B并没有及时的感知到，导致一直进行死循环
 
@@ -80,16 +81,17 @@ threadA end
 threadB end
 ```
 
-那么是如何实现的呢？其实volatile保证可见性的方式和上面提到的缓存一致性协议的原理很类似
+那么是如何实现的呢？
 
 1. 线程A将工作内存的data更改后，强制将data值刷回主内存
 2. 如果线程B的工作内存中有data变量的缓存时，会强制让这个data变量缓存失效
 3. 当线程B需要读取data变量的值时，先从工作内存中读，发现已经过期，就会从主内存中加载data变量的最新值了
 
 放个图理解的更清楚
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190112171858397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
 
-**有序性**
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/75d0c710f1eb9574cf8c7734b28c600e.png)
+
+### 有序性
 
 有序性即程序执行的顺序按照代码的先后顺序执行
 
@@ -101,9 +103,9 @@ flag = true;          //语句2
 ```
 上面代码定义了一个int型变量，定义了一个boolean类型变量，然后分别对两个变量进行赋值操作。从代码顺序上看，语句1是在语句2前面的，那么JVM在真正执行这段代码的时候会保证语句1一定会在语句2前面执行吗？不一定，为什么呢？这里可能会发生指令重排序（Instruction Reorder）。
 
-　　下面解释一下什么是指令重排序，一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。
+下面解释一下什么是指令重排序，一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。
 
-　　比如上面的代码中，语句1和语句2谁先执行对最终的程序结果并没有影响，那么就有可能在执行过程中，语句2先执行而语句1后执行。
+比如上面的代码中，语句1和语句2谁先执行对最终的程序结果并没有影响，那么就有可能在执行过程中，语句2先执行而语句1后执行。
 
 但是有依赖关系的语句不会进行重排序，如下面求圆面积的代码
 
@@ -132,7 +134,7 @@ doSomethingwithconfig(context);
 
 从上面可以看出，指令重排序不会影响单个线程的执行，但是会影响到线程并发执行的正确性
 
-当写双重检测锁定版本的单例模式时，就要用到volatile来保证可见性
+当写双重检测锁定版本的单例模式时，就要用到volatile来保证有序性
 
 ```java
 public class Singleton {
@@ -153,9 +155,21 @@ public class Singleton {
    }
 }
 ```
-至于为什么要用volatile，看推荐阅读。
 
-**原子性**
+正常情况在new Singleton() 分为如下几步
+
+1. 分配内存
+2. 初始化对象
+3. 将 instance 指向内存
+
+如果没有 volatile，new Singleton() 可能被重排序
+
+1. 分配内存
+2. 将 instance 指向内存
+3. 初始化对象
+
+另一个线程会看到非 null 但未初始化的对象。**当加了volatile之后，这三个步骤会被禁止指令重排序**
+### 原子性
 
 原子性即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。
 
@@ -196,8 +210,7 @@ public class Test {
 
 在前面已经提到过，自增操作是不具备原子性的，它包括读取变量的原始值、进行加1操作、写入工作内存。那么就是说自增操作的三个子操作可能会分割开执行，就有可能导致下面这种情况出现：
 
-假如某个时刻变量inc的值为10，
-线程1对变量进行自增操作，线程1先读取了变量inc的原始值，然后线程1被阻塞了；然后线程2对变量进行自增操作，线程2也去读取变量inc的原始值，由于线程1只是对变量inc进行读取操作，而没有对变量进行修改操作，所以不会导致线程2的工作内存中缓存变量inc的缓存行无效，也不会导致主存中的值刷新，**所以线程2会直接去主存读取inc的值**（这个部分小编感觉是海子大佬的笔误，应该是线程2会直接去工作内存读取inc的值，因为工作内存中inc并没有失效），发现inc的值时10，然后进行加1操作，并把11写入工作内存，最后写入主存。
+假如某个时刻变量inc的值为10，线程1对变量进行自增操作，线程1先读取了变量inc的原始值，然后线程1被阻塞了；然后线程2对变量进行自增操作，线程2也去读取变量inc的原始值，由于线程1只是对变量inc进行读取操作，而没有对变量进行修改操作，所以不会导致线程2的工作内存中缓存变量inc的缓存行无效（假设inc的值已经从主内存加载到工作内存了哈），也不会导致主存中的值刷新，所以线程2会去工作内存读取inc的值，发现inc的值时10，然后进行加1操作，并把11写入工作内存，最后写入主存。
 
 然后线程1接着进行加1操作，由于已经读取了inc的值（inc++，包括3个操作，1.读取inc的值，2.进行加1操作，3.写入新的值），注意此时在线程1的工作内存中inc的值仍然为10，所以线程1对inc进行加1操作后inc的值为11，然后将11写入工作内存，最后写入主存。
 
@@ -207,7 +220,7 @@ public class Test {
 
 解决方案：可以通过synchronized或lock，进行加锁，来保证操作的原子性。也可以通过使用AtomicInteger
 
-**应用**
+## volatile关键字的应用
 
 1. 状态标记量
 2. 单例模式中的double check

@@ -269,7 +269,7 @@ function concurrent() {
             sidebarDepth: 0,
             children: [
                 "Synchronized底层实现，锁升级原理.md",
-                "volatile如何保证可见性和有序性.md"
+                "volatile如何保证可见性.md"
             ]
         },
         {

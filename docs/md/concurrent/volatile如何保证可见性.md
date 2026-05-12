@@ -1,17 +1,18 @@
 ---
 layout: post
-title: volatile如何保证可见性和有序性？
+title: volatile如何保证可见性？
 lock: need
 ---
 
-# 并发关键字：volatile如何保证可见性和有序性？
+# 并发关键字：volatile如何保证可见性？
 ![请添加图片描述](https://i-blog.csdnimg.cn/blog_migrate/baf10756ec4b19ad6e5273ffe8b49844.jpeg)
 ## Java内存模型
 在之前的文章中我们提到为了便于进行分析，Java中的内存模型被抽象为如下这种形式。这个内存模型对我们分析volatile关键字非常有用，所以再次提一下
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/42e2815335a5286f1f1e891eaa825325.png)
 ## volatile的作用是什么？
-**volatile可以保证可见性，有序性，但不能保证原子性**
+**volatile可以保证可见性，部分保证有序性（禁止指令重排序），但不能保证原子性**
 
+volatile 可以保证有序性，但只保证与 volatile 变量相关的有序性。底层通过内存屏障（Memory Barrier）禁止特定的指令重排序，并基于 happens-before 规则实现：一个线程对 volatile 变量的写，先行发生于另一个线程对该变量的读
 ### 可见性
 
 **可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值**
@@ -76,6 +77,7 @@ threadB end
 3. 当线程B需要读取data变量的值时，先从工作内存中读，发现已经过期，就会从主内存中加载data变量的最新值了
 
 放个图理解的更清楚
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/75d0c710f1eb9574cf8c7734b28c600e.png)
 
 ### 有序性
@@ -142,6 +144,20 @@ public class Singleton {
    }
 }
 ```
+
+正常情况在new Singleton() 分为如下几步
+
+1. 分配内存
+2. 初始化对象
+3. 将 instance 指向内存
+
+如果没有 volatile，new Singleton() 可能被重排序
+
+1. 分配内存
+2. 将 instance 指向内存
+3. 初始化对象
+
+另一个线程会看到非 null 但未初始化的对象。**当加了volatile之后，这三个步骤会被禁止指令重排序**
 ### 原子性
 
 原子性即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。
