@@ -725,7 +725,7 @@ function kafka() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "Kafka集群搭建.md",
+                "Kafka如何保证消息的可靠性投递.md",
             ],
         }
     ]
