@@ -121,6 +121,9 @@ module.exports = {
                                 link: '/md/dubbo/Dubbo的前世今生.md'
                             },
                         ]
+                    },
+                    {
+                        text: '系统设计', link: '/md/system/如何选择合适的消息队列.md'
                     }
                 ],
                 sidebar: {
@@ -141,7 +144,8 @@ module.exports = {
                     "/md/mysql/": mysql(),
                     "/md/elasticsearch/": elasticsearch(),
                     "/md/kafka/": kafka(),
-                    "/md/ai/": ai()
+                    "/md/ai/": ai(),
+                    "/md/system/": system()
                 }
             }
         }
@@ -741,6 +745,28 @@ function ai() {
                 "claude code 使用教程.md",
                 "mcp指南.md",
                 "agent skill 从原理到实战.md"
+            ],
+        }
+    ]
+}
+
+
+function system() {
+    return [
+        {
+            title: "基础篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "如何选择合适的消息队列.md"
+            ],
+        },
+        {
+            title: "实战篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "如何设计一个短链系统.md"
             ],
         }
     ]
