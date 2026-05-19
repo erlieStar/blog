@@ -758,7 +758,9 @@ function system() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "如何选择合适的消息队列.md"
+                "如何选择合适的消息队列.md",
+                "数据库如何实现高性能.md",
+                "如何保证系统的高可用.md"
             ],
         },
         {
