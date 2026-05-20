@@ -4,7 +4,7 @@ title: MySQL索引为什么要用B+树实现？
 lock: need
 ---
 
-# 面试官：MySQL索引为什么要用B+树实现？
+# MySQL索引为什么要用B+树实现？
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/84bb05acfbb19bed79d079e6b69a98d3.png)
 ## 为什么不用二叉树或者红黑树
