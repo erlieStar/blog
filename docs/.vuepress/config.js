@@ -19,9 +19,14 @@ module.exports = {
                 })();
             `
         ],
-        ['meta', { id: 'referrer', name: 'referrer', content: 'never' }]
+        ['meta', { id: 'referrer', name: 'referrer', content: 'never' }],
     ],
     base: '/blog/',
+    markdown: {
+        extendMarkdown: md => {
+            md.use(require('markdown-it-katex'), { throwOnError: false, errorColor: '#cc0000' })
+        }
+    },
     themeConfig: {
         docsRepo: "erlieStar/javashitang",
         // 编辑文档的所在目录
