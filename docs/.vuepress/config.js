@@ -631,6 +631,7 @@ function redis() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "Redis架构.md",
                 "Redis数据结构为什么既省内存又高效.md",
                 "单线程的Redis为什么能支持10w+的QPS.md",
                 "Redis持久化策略详解（一）.md",
