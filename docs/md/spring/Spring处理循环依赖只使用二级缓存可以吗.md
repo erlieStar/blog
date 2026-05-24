@@ -4,8 +4,25 @@ title: Spring处理循环依赖只使用二级缓存可以吗？
 lock: need
 ---
 
-# Spring处理循环依赖只使用二级缓存可以吗？
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200621193137922.jpg?)
+# Spring AOP源码解析：Spring处理循环依赖只使用二级缓存可以吗？
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ab7d716b7c853a86927afe508f98bfa8.jpeg)
+## 前言
+spring创建bean的时候用到的三级缓存如下
+
+| 缓存 | 说明 |
+|--|--|
+|singletonObjects  | 第一级缓存，存放初始化完成的Bean |
+|earlySingletonObjects|第二级缓存，存放实例化完成的Bean，有可能被进行了代理|
+|singletonFactories|第三级缓存，存放延迟生成代理对象的工厂|
+
+有了三级缓存后，会出现如下两种情况
+
+1. 在没有循环依赖的情况下，Bean还是在初始化完成才生成代理对象
+2. 在出现循环依赖被其他对象注入时，才提前生成代理对象（此时只完成了实例化）
+
+**三级缓存的作用是发生循环依赖时，代理对象才会提前生成；正常情况下，依然遵循标准的生命周期，在初始化完成才生成代理对象**
+
+下面我们详细分析一下，为什么要有三级缓存？
 ## 什么是循环依赖？
 先说一下什么是循环依赖，Spring在初始化A的时候需要注入B，而初始化B的时候需要注入A，在Spring启动后这2个Bean都要被初始化完成
 
@@ -157,6 +174,7 @@ public class DependencyDemoV1 {
 **在开始后面的内容的时候，我们先明确2个概念**
 
 实例化：调用构造函数将对象创建出来
+
 初始化：调用构造函数将对象创建出来后，给对象的属性也被赋值
 
 可以看到只用了一个map就实现了循环依赖的实现，但这种实现有个小缺陷，singletonObjects中的类有可能只是完成了实例化，并没有完成初始化
@@ -297,38 +315,36 @@ public class DependencyDemoV3 {
 2. **不提前创建好代理对象，在出现循环依赖被其他对象注入时，才提前生成代理对象（此时只完成了实例化）。这样在没有循环依赖的情况下，Bean还是在初始化完成才生成代理对象**（需要3级缓存）
 
 **所以到现在为止你知道3级缓存的作用了把，主要是为了正常情况下，代理对象能在初始化完成后生成，而不用提前生成**
+
 | 缓存 | 说明 |
 |--|--|
 |singletonObjects  | 第一级缓存，存放初始化完成的Bean |
 |earlySingletonObjects|第二级缓存，存放实例化完成的Bean，有可能被进行了代理|
-|singletonFactories|延迟生成代理对象|
+|singletonFactories|第三级缓存，存放延迟生成代理对象的工厂|
 
 ## 源码解析
 获取Bean的时候先尝试从3级缓存中获取，和我们上面的Demo差不多哈
 
 DefaultSingletonBeanRegistry#getSingleton
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7924dfdd6d5b4ed2a75e02afa186bab1.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/be9616502c50f121bcbbf3a8064210f7.png)
 当从缓存中获取不到时，会进行创建
 AbstractAutowireCapableBeanFactory#doCreateBean（删除了部分代码哈）
-![在这里插入图片描述](https://img-blog.csdnimg.cn/93416b9665274ee998218aeae51ae28c.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/38e997e0aa8dabb75e26c620735a02a8.png)
 发生循环依赖时，会从工厂里获取代理对象哈
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/75cbc3c3cf134a9f8abebabaae218f88.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/aaca13b0e8a41f717ef03c339edce8e3.png)
 当开启aop代理时，SmartInstantiationAwareBeanPostProcessor的一个实现类有AbstractAutoProxyCreator
 
 AbstractAutoProxyCreator#getEarlyBeanReference
-![在这里插入图片描述](https://img-blog.csdnimg.cn/e591128ede814d3196d886e909d5eee4.png)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/734e828b0683601975806a1282a004eb.png)
 getEarlyBeanReference方法提前进行代理，为了防止后面再次进行代理，需要用earlyProxyReferences记录一下，这个Bean已经被代理过了，不用再代理了
 
 AbstractAutoProxyCreator#postProcessAfterInitialization
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4f26ed9a308f4e04a1cbdd8f99b00a89.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/77635bce145eabd7efdddd3d1342832c.png)
 这个方法是进行aop代理的地方，因为有可能提前代理了，所以先根据earlyProxyReferences判断一下，是否提前代理了，提前代理过就不用代理了
 
 当bean初始化完毕，会放入一级缓存，并从二三级缓存删除
 
 DefaultSingletonBeanRegistry#addSingleton
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d871349721aa4a959e67c3a403a27399.png)
-
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/41a31957be32ff1606f09d4dab21db44.png)
 发生循环依赖时，整体的执行流程如下
-![在这里插入图片描述](https://img-blog.csdnimg.cn/0fd882ca9fcc4c14941065dafe0e0d34.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/bf186fbd577ee4d28b817b99db2dc381.png)
