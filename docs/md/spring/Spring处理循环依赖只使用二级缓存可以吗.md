@@ -346,5 +346,7 @@ AbstractAutoProxyCreator#postProcessAfterInitialization
 
 DefaultSingletonBeanRegistry#addSingleton
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/41a31957be32ff1606f09d4dab21db44.png)
+
 发生循环依赖时，整体的执行流程如下
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/bf186fbd577ee4d28b817b99db2dc381.png)
