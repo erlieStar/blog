@@ -1,10 +1,11 @@
 ---
 layout: post
-title: ThreadLocal为什么会内存泄漏？
+title: ThreadLocal的应用场景和注意事项有哪些？
 lock: need
 ---
 
-# 并发容器：ThreadLocal为什么会内存泄漏？
+# 并发容器：ThreadLocal的应用场景和注意事项有哪些？
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c50c24854a3e266b3a481a106ffc6414.jpeg)
 ## ThreadLocal有哪些作用？
 ThreadLocal主要有如下2个作用
@@ -133,6 +134,7 @@ ThreadLocal就是通过给每个线程绑定一个指定类型的变量来实现
 在Thread类内部有用一个Map容器存变量。它的大概结构如下所示
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/4d3c62bc078d8b615ea38330b47e3bfa.png)
+
 ThreadLocalMap是一个Map，key是ThreadLocal，value是Object
 
 映射到源码就是如下所示：
@@ -267,7 +269,6 @@ static class ThreadLocalMap {
 }
 ```
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/01be3abccce50d766fd27d930ed4843b.png)
 **为了引出后面内存泄漏是如何发生的？我们先来回顾一下JDK中的四种引用类型**
 
 1. 强引用，直接new
@@ -277,17 +278,26 @@ static class ThreadLocalMap {
 
 **ThreadLocal为啥要用弱引用？**
 
-我们来想一下ThreadLocal不用软引用会发生啥问题？如果ThreadLocal不用软引用，那么线程会一直存在对ThreadLocal的强引用，当ThreadLocal不使用时也不会被回收，这样就会造成内存泄漏的问题
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/0243ad229cb748f4b52d15536a5fa262.png)
 
-当我们将ThreadLocal的引用比变为弱引用时，就可以很好的解决问题。当ThreadLocal不用时，栈中ThreadLocal Ref到ThreadLocal的强引用会断开，而此时ThreadLocalMap到ThreadLocal为弱引用，在GC的时候可以直接删除。
+当方法结束后，栈上的TheadLocal Ref就不再使用了，但是TheadLocal对象因为还有一条引用链在，所以就会导致它无法被回收，久而久之就有可能会导致OOM
 
-**为什么会发生内存泄漏？**
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/4351636981c44d5a8bd1d9ae30549e76.png)
+如果用了弱引用，那么ThreadLocal对象就可以在下次GC的时候被回收掉了
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/41be0f3cf60f40e49602d0c90cd23386.png)
+**既然设计了弱引用，为什么还会内存泄漏？**
 
-ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用来引用它，那么系统 GC 的时候，这个ThreadLocal势必会被回收，这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链：**Thread Ref -> Thread -> ThreaLocalMap -> Entry -> value**永远无法回收，造成内存泄漏
+Key 变成了 null，但 Value 还是强引用。线程池中的工作线程有可能存活很长时间也不销毁，这就导致了一条无法斩断的强引用链：Thread Ref -> Thread -> ThreadLocalMap -> Entry -> value
 
-大白话一点，ThreadLocalMap的key是弱引用，GC时会被回收掉，那么就有可能存在ThreadLocalMap<null, Object>的情况，这个Object就是泄露的对象
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/f5ce71ff3976437f8031e82801adc3b4.png)
 
-其实，ThreadLocalMap的设计中已经考虑到这种情况，也加上了一些防护措施：在ThreadLocal的get()，set()，remove()的时候都会清除线程ThreadLocalMap里所有key为null的value
+这个 Key 为 null 的 Value 永远无法被访问到，但也永远无法被 GC 回收，从而导致了内存泄漏
+
+**JDK 的自愈机制与局限性**
+
+JDK 设计者在 ThreadLocalMap 的 get()、set()、remove() 方法中做了清扫逻辑：当遇到 Key 为 null 的 Entry 时，会顺便将对应的 Value 置为 null 以便回收。
+
+但这个机制是有条件的：如果该线程在后续的操作中，再也没有调用过该 ThreadLocal 的任何方法，那么这个清理动作就永远不会触发，内存依然会泄漏
 
 **如何解决脏数据和内存泄漏？**
 

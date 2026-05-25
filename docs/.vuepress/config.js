@@ -176,7 +176,6 @@ function java() {
                 "写一下单例模式吧，知道单例模式有几种写法吗.md",
                 "垃圾回收中GC Root对象有哪几种.md",
                 "说一下构造函数，静态代码块，构造代码块等的加载顺序.md",
-                "ThreadLocal的应用场景和注意事项有哪些.md",
                 "你知道zookeeper有哪些作用吗.md",
                 "既然你用了原子类，那你知道CAS的工作原理是啥吗.md",
                 "MyBatis你只写了接口为啥就能执行sql啊.md",
@@ -305,7 +304,7 @@ function concurrent() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "ThreadLocal为什么会内存泄漏.md",
+                "ThreadLocal的应用场景和注意事项有哪些.md",
                 "读多写少？试试CopyOnWriteArrayList.md",
                 "HashMap-1.7.md",
                 "HashMap-1.8.md",
