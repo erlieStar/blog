@@ -1,15 +1,15 @@
 ---
 layout: post
-title: ReadWriteLock是如何做到读读并行的？
+title: ReentrantReadWriteLock是如何做到读读并行的？
 lock: need
 ---
 
-# 并发工具类：ReadWriteLock是如何做到读读并行的？
+# 并发工具类：ReentrantReadWriteLock是如何做到读读并行的？
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/b1e89d2f90727ef5909605c411cf027c.png)
-## ReadWriteLock的特点
+## ReentrantReadWriteLock的特点
 当我们想保证并发安全的时候，我们可以使用ReentrantLock或者synchronized。这样就能做到写写互斥，读写互斥，读读互斥。
 
-鉴于大多数业务场景中都是读多写少，我们有没有可能做到读读并行呢？还真可以，这个类就是ReadWriteLock
+鉴于大多数业务场景中都是读多写少，我们有没有可能做到读读并行呢？还真可以，这个类就是ReentrantReadWriteLock
 ```java
 @Test
 public void testLock() throws IOException {
@@ -67,6 +67,7 @@ thread3 write unlock 1646210523367
 
 从上面的执行结果，**我们可以看到读锁和写锁互斥，但是读锁和读锁可以并行**
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/5b448f995467561ce71024522805a8e1.png)
+
 和ReentrantLock类似ReadWriteLock也分为公平锁和非公平锁。到现在估计你也能猜出来公平性和非公平性体现在哪了！
 ```java
 public ReentrantReadWriteLock(boolean fair) {

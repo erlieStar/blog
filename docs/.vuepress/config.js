@@ -291,10 +291,10 @@ function concurrent() {
                 "AQS有哪些作用？（一）.md",
                 "AQS有哪些作用？（二）.md",
                 "ReentrantLock的效率为什么这么高.md",
+                "ReentrantReadWriteLock是如何做到读读并行的.md",
                 "CountDownLatch有哪些用处.md",
                 "CyclicBarrier，一不小心，锁就不能重用了.md",
                 "用Semaphore实现限流.md",
-                "ReadWriteLock是如何做到读读并行的.md",
                 "如何手写一个线程池.md",
                 "使用线程池有什么好处.md"
             ]
