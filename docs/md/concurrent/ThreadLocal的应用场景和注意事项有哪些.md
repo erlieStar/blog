@@ -49,7 +49,9 @@ public static void main(String[] args) {
     service.shutdown();
 }
 ```
-结果报异常了，因为部分线程获取的时间不对![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/48f29c45ce26e78f48e776b514084e36.png)
+结果报异常了，因为部分线程获取的时间不对
+
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/48f29c45ce26e78f48e776b514084e36.png)
 
 那么我们如何解决这个问题呢？
 
