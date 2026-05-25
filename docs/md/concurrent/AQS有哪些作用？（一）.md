@@ -96,7 +96,9 @@ protected boolean tryRelease(int arg) {
 **所以你看基于AQS实现的锁，基本上只重写了这2个方法，意识到AQS这个类封装的有多好了把？**
 
 为了保存持有锁的线程，用来实现可重入锁，AbstractQueuedSynchronizer继承了AbstractOwnableSynchronizer类，这个类只用来保存获取锁的线程，没有其他逻辑
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ddb6e4a05537857a953dd69a120752df.png)
+
 上面的例子中，我们在手写锁的时候，队列是Queue，并且是把Thread直接放到Queue中，而在AQS中定义了一个类Node来包装线程，并且使用双向链表来实现队列的
 
 ```java
@@ -129,12 +131,13 @@ static final class Node {
 }
 ```
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/acb4c168281fd38a11223c3c96a863ac.png)
+
 **我们只分析同步队列哈，等待队列和Condition相关，我们后续来分析**
 
 可以看到Node类中还有一个重要的属性waitStatus（默认是0）表示线程的状态，包含的状态有
 
 状态 | 值 | 含义 
-- | :-: | :-: 
+:-:  | :-: | :-: 
 CANCELLED | 1| 线程获取锁的请求已经取消|
 SIGNAL | -1 | 表示当前节点的的后继节点将要或者已经被阻塞，在当前节点释放的时候需要unpark后继节点|
 CONDITION | -2 | 表示当前节点在等待condition，即在condition队列中|
@@ -159,21 +162,26 @@ head和tail比较好理解，指向同步队列的头节点和尾节点
 **而这个state在不同的子类中有不同的含义**
 
 **ReentrantLock**：state表示加锁的次数，为0表示没有被加锁，为1表示被加锁1次，为2表示被加锁2次，因为ReentrantLock是一个可以重入的锁
+
 **CountDownLatch**：state表示一个计数器，当state>0时，线程调用await会被阻塞，当state值被减少为0时，线程会被唤醒
+
 **Semaphore**：state表示资源的数量，state>0时，可以获取资源，并将state-1，当state=0时，获取不到资源，此时线程会被阻塞。当资源被释放时，state+1，此时其他线程可以获得资源
 
 state的值都是在工具类的构造函数中赋值的
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/f436ff6b28fb22c13a8e8405f4865d2f.png)
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/0aa7525e5cdfc6db676b5f27de63d626.png)
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/1832db3f0ac5459842e5a7e0ca87f3cc.png)
-从类的继承图我们可以明显看到在锁的实现中AQS起到了非常重要的作用
 
+从类的继承图我们可以明显看到在锁的实现中AQS起到了非常重要的作用
 
 **本节我们先分析这些工具类加解锁的逻辑，后面一节分析AQS入队，出队，阻塞，唤醒的逻辑**
 
 ## 获取独占锁
 ReentrantLock获取独占锁
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/c99098c8c44e113a486ac05553427da1.png)
+
 **ReentrantLock的实现分为公平锁和非公平锁，默认是非公平锁，吞吐量更高，我们就单独分析一下非公平锁**
 
 可以看到上来先尝试获取一波锁，并没有直接到同步队列中等待，这就是非公平性的体现
