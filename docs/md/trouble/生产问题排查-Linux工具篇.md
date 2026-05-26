@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 生产环境发生问题，你一般怎么排查？（Linux工具篇）
+title: 生产问题排查-Linux工具篇
 lock: need
 ---
 
-# 面试官：生产环境发生问题，你一般怎么排查？（Linux工具篇）
+# 生产问题排查-Linux工具篇
 
 ![请添加图片描述](https://img-blog.csdnimg.cn/367e3645998d4294a646d0a7dc4b61b4.jpg?)
 
