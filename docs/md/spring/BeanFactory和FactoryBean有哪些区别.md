@@ -4,7 +4,7 @@ title: BeanFactory和FactoryBean有哪些区别？
 lock: need
 ---
 
-# 面试官：BeanFactory和FactoryBean有哪些区别？
+# Spring IOC源码解析：BeanFactory和FactoryBean有哪些区别？
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210406224557106.jpg?)
 ## 区别
 说实话，他俩除了名字比较像以外，好像没有其他共同点了。

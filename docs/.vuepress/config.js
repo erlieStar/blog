@@ -187,7 +187,6 @@ function java() {
                 "Spring AOP是怎么实现的.md",
                 "如何用explain分析sql执行性能.md",
                 "cookie和session是怎么交互的.md",
-                "Spring如何解决循环依赖.md",
                 "你知道的限流算法有哪些.md",
                 "多个线程执行完毕后，才执行另一个线程，该怎么做.md",
                 "Servlet Filter和Spring MVC Interceptor有哪些区别.md",
@@ -235,7 +234,6 @@ function java() {
                 "如何手写一个Spring Boot starter.md",
                 "说一下Spring MVC的启动流程呗.md",
                 "说一下Spring Boot的启动过程把.md",
-                "BeanFactory和FactoryBean有哪些区别.md",
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "说一下类加载的过程.md",
@@ -532,6 +530,7 @@ function spring() {
                 "Spring Bean生命周期详解（一）.md",
                 "Spring Bean生命周期详解（二）.md",
                 "@Resource和@Autowired有啥区别.md",
+                "BeanFactory和FactoryBean有哪些区别.md"
             ]
         },
         {
