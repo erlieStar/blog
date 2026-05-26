@@ -129,6 +129,9 @@ module.exports = {
                     },
                     {
                         text: '系统设计', link: '/md/system/如何选择合适的消息队列.md'
+                    },
+                    {
+                        text: '问题排查', link: '/md/trouble/线上服务CPU飙高怎么排查.md'
                     }
                 ],
                 sidebar: {
@@ -150,7 +153,8 @@ module.exports = {
                     "/md/elasticsearch/": elasticsearch(),
                     "/md/kafka/": kafka(),
                     "/md/ai/": ai(),
-                    "/md/system/": system()
+                    "/md/system/": system(),
+                    "/md/trouble/": trouble(),
                 }
             }
         }
@@ -170,7 +174,6 @@ function java() {
                 "同样是等待，说一下sleep和wait的区别.md",
                 "HashMap是怎么实现的.md",
                 "说一下Http请求的报文格式及常用状态码.md",
-                "线上服务CPU飙高怎么排查.md",
                 "JVM运行时数据区包含哪几部分？作用是啥.md",
                 "索引优化策略有哪些.md",
                 "写一下单例模式吧，知道单例模式有几种写法吗.md",
@@ -226,7 +229,6 @@ function java() {
                 "假如你在项目中定义一个String类，程序用jdk的还是你定义的.md",
                 "Object类有哪些方法.md",
                 "单线程的Redis为什么能支持10w+的QPS.md",
-                "内存泄漏，内存溢出如何排查.md",
                 "AQS有啥作用啊.md",
                 "如何快速定位慢SQL.md",
                 "Spring MVC拦截器有哪些应用场景.md",
@@ -238,9 +240,6 @@ function java() {
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "说一下类加载的过程.md",
                 "说说常用的排序算法呗.md",
-                "生产环境发生问题，你一般怎么排查-网络篇.md",
-                "生产环境发生问题，你一般怎么排查-JVM命令行监控工具篇.md",
-                "生产环境发生问题，你一般怎么排查-Linux工具篇.md",
                 "分布式ID的生成策略有哪些.md",
                 "从浏览器输入URL到页面展示出来，中间发生了什么.md",
                 "RocketMQ如何保证消息的可靠性投递.md",
@@ -754,7 +753,7 @@ function ai() {
 function system() {
     return [
         {
-            title: "基础篇",
+            title: "理论篇",
             collapsable: false,
             sidebarDepth: 0,
             children: [
@@ -771,6 +770,23 @@ function system() {
             children: [
                 "如何设计一个短链系统.md",
                 "如何设计一个秒杀系统.md"
+            ],
+        }
+    ]
+}
+
+
+function trouble() {
+    return [
+        {
+            title: "理论篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "线上服务CPU飙高怎么排查.md",
+                "生产问题排查-网络篇.md",
+                "生产问题排查-JVM命令行监控工具篇.md",
+                "生产问题排查-Linux工具篇.md",
             ],
         }
     ]

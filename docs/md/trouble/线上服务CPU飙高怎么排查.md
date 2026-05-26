@@ -4,7 +4,7 @@ title: 线上服务CPU飙高怎么排查？
 lock: need
 ---
 
-# 面试官：线上服务CPU飙高怎么排查？
+# 线上服务CPU飙高怎么排查？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200901231248518.png?)
 ## 用jstack排查
