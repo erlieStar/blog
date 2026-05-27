@@ -222,7 +222,6 @@ function java() {
                 "脏读，不可重复读，幻读是如何发生的.md",
                 "索引为什么会失效.md",
                 "怎么查找etc目录下大于1M的文件.md",
-                "一张千万级别数据的表想做分页，如何优化.md",
                 "ConcurrentHashMap1.7和1.8有哪些区别啊.md",
                 "final关键字有哪些作用.md",
                 "Get和Post的区别是什么.md",
