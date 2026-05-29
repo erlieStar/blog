@@ -4,7 +4,7 @@ title: Redis中过期的key是怎么被删除的？
 lock: need
 ---
 
-# 面试官：Redis中过期的key是怎么被删除的？
+# Redis实战：Redis中过期的key是怎么被删除的？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201108181755982.png?)
 ## 介绍
