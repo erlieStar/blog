@@ -4,7 +4,7 @@ title: Spring事务的传播行为有几种？
 lock: need
 ---
 
-# 面试官：Spring事务的传播行为有几种？
+# Spring AOP源码解析：Spring事务的传播行为有几种？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020031009125057.jpg?)
 ## @Transactional注解属性

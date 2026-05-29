@@ -195,7 +195,6 @@ function java() {
                 "Servlet Filter和Spring MVC Interceptor有哪些区别.md",
                 "说一下常见的垃圾收集器及其适用场景.md",
                 "常见的垃圾回收算法有哪些.md",
-                "Spring事务的传播行为有几种.md",
                 "说一下你对数据库事务四大特性的理解.md",
                 "HashMap死循环形成的原因是什么.md",
                 "高并发下如何保证接口的幂等性.md",
@@ -212,14 +211,11 @@ function java() {
                 "说一下Spring MVC的执行流程，为什么要这么设计.md",
                 "说一下Mybatis插件的实现原理.md",
                 "Mybatis一级缓存和二级缓存同时开启，先查询哪个缓存.md",
-                "Redis中过期的key是怎么被删除的.md",
                 "说一下Synchronized底层实现，锁升级的具体过程.md",
                 "Synchronized和Lock接口有哪些区别.md",
                 "String类为什么被设计为不可变的.md",
                 "让你写一个爬虫系统，如何对url进行去重.md",
                 "同样是注册中心，Zookeeper和Eureka有哪些区别.md",
-                "MVCC是如何实现的.md",
-                "脏读，不可重复读，幻读是如何发生的.md",
                 "索引为什么会失效.md",
                 "怎么查找etc目录下大于1M的文件.md",
                 "ConcurrentHashMap1.7和1.8有哪些区别啊.md",
@@ -228,8 +224,6 @@ function java() {
                 "假如你在项目中定义一个String类，程序用jdk的还是你定义的.md",
                 "Object类有哪些方法.md",
                 "单线程的Redis为什么能支持10w+的QPS.md",
-                "AQS有啥作用啊.md",
-                "如何快速定位慢SQL.md",
                 "Spring MVC拦截器有哪些应用场景.md",
                 "Spring Boot 自动装配是如何实现的.md",
                 "如何手写一个Spring Boot starter.md",
@@ -241,7 +235,6 @@ function java() {
                 "说说常用的排序算法呗.md",
                 "分布式ID的生成策略有哪些.md",
                 "从浏览器输入URL到页面展示出来，中间发生了什么.md",
-                "RocketMQ如何保证消息的可靠性投递.md",
                 "分布式事务的解决方案有哪些.md"
             ]
         }
@@ -542,7 +535,8 @@ function spring() {
                 "生成代理对象.md",
                 "执行切面.md",
                 "Spring处理循环依赖只使用二级缓存可以吗.md",
-                "Spring事务实现原理.md"
+                "Spring事务实现原理.md",
+                "Spring事务的传播行为有几种.md"
             ]
         },
         {
@@ -592,6 +586,7 @@ function rocketmq() {
             sidebarDepth: 0,
             children: [
                 "消息发送和消费核心流程汇总.md",
+                "如何保证消息的可靠性投递.md",
                 "消息丢失如何排查.md"
             ]
         },
@@ -639,7 +634,8 @@ function redis() {
                 "Redis有哪些慢操作.md",
                 "缓存雪崩，缓存穿透，缓存击穿.md",
                 "如何保证缓存和数据库的一致性.md",
-                "Redis数据类型有哪些应用场景.md"
+                "Redis数据类型有哪些应用场景.md",
+                "Redis中过期的key是怎么被删除的.md"
             ]
         }
     ]
