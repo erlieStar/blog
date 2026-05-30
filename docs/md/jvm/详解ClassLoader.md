@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 假如你在项目中定义一个String类，程序用jdk的还是你定义的？
+title: 详解ClassLoader
 lock: need
 ---
 
-# 面试官：假如你在项目中定义一个String类，程序用jdk的还是你定义的？
+# JVM实战：详解ClassLoader
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210228194640259.jpg?)
 
