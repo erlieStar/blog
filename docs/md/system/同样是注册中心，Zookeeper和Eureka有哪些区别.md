@@ -4,7 +4,7 @@ title: 同样是注册中心，Zookeeper和Eureka有哪些区别？
 lock: need
 ---
 
-# 面试官：同样是注册中心，Zookeeper和Eureka有哪些区别？
+# 同样是注册中心，Zookeeper和Eureka有哪些区别？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210101111443137.jpg?)
 ## CAP定理

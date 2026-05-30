@@ -212,7 +212,6 @@ function java() {
                 "Synchronized和Lock接口有哪些区别.md",
                 "String类为什么被设计为不可变的.md",
                 "让你写一个爬虫系统，如何对url进行去重.md",
-                "同样是注册中心，Zookeeper和Eureka有哪些区别.md",
                 "索引为什么会失效.md",
                 "怎么查找etc目录下大于1M的文件.md",
                 "ConcurrentHashMap1.7和1.8有哪些区别啊.md",
@@ -754,6 +753,15 @@ function system() {
                 "数据库如何实现高性能.md",
                 "如何保证系统的高可用.md",
                 "MongoDB架构详解.md"
+            ],
+        },
+        {
+            title: "微服务",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "同样是注册中心，Zookeeper和Eureka有哪些区别.md",
+                "微服务网关有哪些作用"
             ],
         },
         {
