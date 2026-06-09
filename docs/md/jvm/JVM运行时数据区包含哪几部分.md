@@ -1,21 +1,12 @@
 ---
 layout: post
-title: JVM运行时数据区包含哪几部分？作用是啥？
+title: JVM运行时数据区包含哪几部分？
 lock: need
 ---
 
-# 面试官：JVM运行时数据区包含哪几部分？作用是啥？
+# JVM实战：JVM运行时数据区包含哪几部分？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/896f5bb63b594c90a4840aa57ff718f7.png?)
-
-## JDK，JRE，JVM的联系是啥？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190118193517872.PNG?)
-
-JVM Java Virtual Machine
-JDK Java Development Kit
-JRE Java Runtime Environment
-看上图官方的介绍讲的很清楚
 ## JVM的作用是啥？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190121174837892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
@@ -37,7 +28,7 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 ### 程序计数器
 程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器
 
-为什么要记录当前线程所执行的字节码的行号？直接执行完不就可以了吗？ 
+为什么要记录当前线程所执行的字节码的行号？直接执行完不就可以了吗？
 
 因为代码是在线程中运行的，线程有可能被挂起。即CPU一会执行线程A，线程A还没有执行完被挂起了，接着执行线程B，最后又来执行线程A了，CPU得知道执行线程A的哪一部分指令，线程计数器会告诉CPU。
 
