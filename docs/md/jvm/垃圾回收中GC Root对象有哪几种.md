@@ -4,7 +4,7 @@ title: 垃圾回收中GC Root对象有哪几种？
 lock: need
 ---
 
-# 面试官：垃圾回收中GC Root对象有哪几种？
+# JVM实战：垃圾回收中GC Root对象有哪几种？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200901234621495.png?)
 
