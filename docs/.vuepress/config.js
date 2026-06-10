@@ -208,7 +208,6 @@ function java() {
                 "final关键字有哪些作用.md",
                 "Get和Post的区别是什么.md",
                 "Object类有哪些方法.md",
-                "单线程的Redis为什么能支持10w+的QPS.md",
                 "Spring MVC拦截器有哪些应用场景.md",
                 "Spring Boot 自动装配是如何实现的.md",
                 "如何手写一个Spring Boot starter.md",
