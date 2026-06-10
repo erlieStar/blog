@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 同样是注册中心，Zookeeper和Eureka有哪些区别？
+title: CAP定理
 lock: need
 ---
 
-# 同样是注册中心，Zookeeper和Eureka有哪些区别？
+# CAP定理
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210101111443137.jpg?)
 ## CAP定理

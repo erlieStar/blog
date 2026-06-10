@@ -749,8 +749,8 @@ function system() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "CAP定理.md",
                 "如何对微服务进行拆分.md",
-                "同样是注册中心，Zookeeper和Eureka有哪些区别.md",
                 "微服务网关有哪些作用.md"
             ],
         },
