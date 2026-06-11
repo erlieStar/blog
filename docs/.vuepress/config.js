@@ -173,7 +173,6 @@ function java() {
                 "说一下String StringBuffer StringBuilder的区别.md",
                 "同样是等待，说一下sleep和wait的区别.md",
                 "说一下Http请求的报文格式及常用状态码.md",
-                "索引优化策略有哪些.md",
                 "写一下单例模式吧，知道单例模式有几种写法吗.md",
                 "说一下构造函数，静态代码块，构造代码块等的加载顺序.md",
                 "你知道zookeeper有哪些作用吗.md",
