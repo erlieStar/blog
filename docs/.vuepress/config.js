@@ -262,7 +262,7 @@ function concurrent() {
                 "ReentrantReadWriteLock是如何做到读读并行的.md",
                 "CountDownLatch有哪些用处.md",
                 "CyclicBarrier，一不小心，锁就不能重用了.md",
-                "用Semaphore实现限流.md",
+                "用Semaphore控制同时访问特定资源的线程数.md",
                 "如何手写一个线程池.md",
                 "线程池执行流程.md"
             ]
