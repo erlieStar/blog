@@ -616,7 +616,6 @@ function redis() {
                 "缓存淘汰策略.md",
                 "Redis有哪些慢操作.md",
                 "缓存雪崩，缓存穿透，缓存击穿.md",
-                "如何保证缓存和数据库的一致性.md",
                 "Redis数据类型有哪些应用场景.md",
                 "Redis中过期的key是怎么被删除的.md"
             ]
@@ -736,6 +735,7 @@ function system() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "如何保证缓存和数据库的一致性.md",
                 "如何选择合适的消息队列.md",
                 "数据库如何实现高性能.md",
                 "如何保证系统的高可用.md",
