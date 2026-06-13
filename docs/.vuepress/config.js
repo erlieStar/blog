@@ -105,6 +105,14 @@ module.exports = {
                         text: '分布式',
                         items: [
                             {
+                                text: '手写RPC',
+                                link: '/md/rpc/如何手写一个RPC框架.md'
+                            },
+                            {
+                                text: 'Dubbo',
+                                link: '/md/dubbo/Dubbo的前世今生.md'
+                            },
+                            {
                                 text: '分布式事务',
                                 link: '/md/transaction/01.7种常见解决方案汇总.md'
                             },
@@ -115,17 +123,7 @@ module.exports = {
                         ]
                     },
                     {
-                        text: 'RPC',
-                        items: [
-                            {
-                                text: '手写RPC',
-                                link: '/md/rpc/如何手写一个RPC框架.md'
-                            },
-                            {
-                                text: 'Dubbo',
-                                link: '/md/dubbo/Dubbo的前世今生.md'
-                            },
-                        ]
+                        text: '微服务', link: '/md/microservices/如何对微服务进行拆分.md'
                     },
                     {
                         text: '系统设计', link: '/md/system/如何选择合适的消息队列.md'
@@ -154,6 +152,7 @@ module.exports = {
                     "/md/kafka/": kafka(),
                     "/md/ai/": ai(),
                     "/md/system/": system(),
+                    "/md/microservices/": microservices(),
                     "/md/trouble/": trouble(),
                 }
             }
@@ -745,6 +744,20 @@ function system() {
             ],
         },
         {
+            title: "实战篇",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "如何设计一个短链系统.md",
+                "如何设计一个秒杀系统.md"
+            ],
+        }
+    ]
+}
+
+function microservices() {
+    return [
+        {
             title: "微服务",
             collapsable: false,
             sidebarDepth: 0,
@@ -752,15 +765,6 @@ function system() {
                 "CAP定理.md",
                 "如何对微服务进行拆分.md",
                 "微服务网关有哪些作用.md"
-            ],
-        },
-        {
-            title: "实战篇",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "如何设计一个短链系统.md",
-                "如何设计一个秒杀系统.md"
             ],
         }
     ]
