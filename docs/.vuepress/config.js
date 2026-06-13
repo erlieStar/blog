@@ -764,7 +764,8 @@ function microservices() {
             children: [
                 "CAP定理.md",
                 "如何对微服务进行拆分.md",
-                "微服务网关有哪些作用.md"
+                "微服务网关有哪些作用.md",
+                "分布式链路追踪.md"
             ],
         }
     ]
