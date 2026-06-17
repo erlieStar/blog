@@ -211,7 +211,8 @@ function java() {
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "分布式ID的生成策略有哪些.md",
-                "从浏览器输入URL到页面展示出来，中间发生了什么.md"
+                "从浏览器输入URL到页面展示出来，中间发生了什么.md",
+                "加密算法有哪些.md"
             ]
         }
     ]
@@ -311,6 +312,7 @@ function mysql() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "高可用架构.md",
                 "数据是如何进行存储和查询的.md",
                 "Buffer Pool 提高页的访问速度.md",
                 "脏读，不可重复读，幻读.md",
