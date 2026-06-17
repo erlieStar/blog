@@ -114,7 +114,7 @@ module.exports = {
                             },
                             {
                                 text: '分布式事务',
-                                link: '/md/transaction/01.7种常见解决方案汇总.md'
+                                link: '/md/transaction/XA规范.md"'
                             },
                             {
                                 text: 'Seata',
@@ -405,12 +405,12 @@ function transaction() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "01.7种常见解决方案汇总.md",
-                "02.XA规范.md",
-                "03.Seata AT模式.md",
-                "04.TCC设计思想及其可能遇到的问题.md",
-                "05.Seata TCC 模式.md",
-                "06.RocketMQ事务消息.md",
+                "7种常见解决方案汇总.md",
+                "XA规范.md",
+                "Seata AT模式.md",
+                "TCC设计思想及其可能遇到的问题.md",
+                "Seata TCC 模式.md",
+                "RocketMQ事务消息.md",
             ]
         }
     ]
@@ -766,6 +766,7 @@ function microservices() {
             children: [
                 "CAP定理.md",
                 "如何对微服务进行拆分.md",
+                "分布式事务.md",
                 "微服务网关有哪些作用.md",
                 "分布式链路追踪.md"
             ],
