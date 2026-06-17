@@ -405,7 +405,6 @@ function transaction() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "7种常见解决方案汇总.md",
                 "XA规范.md",
                 "Seata AT模式.md",
                 "TCC设计思想及其可能遇到的问题.md",
