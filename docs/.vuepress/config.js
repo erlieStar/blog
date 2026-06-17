@@ -114,7 +114,7 @@ module.exports = {
                             },
                             {
                                 text: '分布式事务',
-                                link: '/md/transaction/XA规范.md"'
+                                link: '/md/transaction/XA规范.md'
                             },
                             {
                                 text: 'Seata',
