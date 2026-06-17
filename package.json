@@ -24,6 +24,7 @@
   "homepage": "https://github.com/erlieStar/javashitang#readme",
   "dependencies": {
     "katex": "^0.16.47",
-    "markdown-it-katex": "^2.0.3"
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-texmath": "^1.0.0"
   }
 }

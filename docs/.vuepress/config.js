@@ -24,7 +24,11 @@ module.exports = {
     base: '/blog/',
     markdown: {
         extendMarkdown: md => {
-            md.use(require('markdown-it-katex'), { throwOnError: false, errorColor: '#cc0000' })
+            md.use(require('markdown-it-texmath'), {
+                engine: require('katex'),
+                delimiters: 'dollars',
+                katexOptions: { throwOnError: false, errorColor: '#cc0000' }
+            })
         }
     },
     themeConfig: {
