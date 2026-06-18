@@ -209,7 +209,6 @@ function java() {
                 "Spring MVC拦截器有哪些应用场景.md",
                 "Spring Boot 自动装配是如何实现的.md",
                 "如何手写一个Spring Boot starter.md",
-                "说一下Spring MVC的启动流程呗.md",
                 "说一下Spring Boot的启动过程把.md",
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
