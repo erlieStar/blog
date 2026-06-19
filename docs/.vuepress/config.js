@@ -213,7 +213,8 @@ function java() {
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "分布式ID的生成策略有哪些.md",
                 "从浏览器输入URL到页面展示出来，中间发生了什么.md",
-                "加密算法有哪些.md"
+                "加密算法有哪些.md",
+                "https是如何保证安全的.md"
             ]
         }
     ]
@@ -265,6 +266,7 @@ function concurrent() {
                 "CountDownLatch有哪些用处.md",
                 "CyclicBarrier，一不小心，锁就不能重用了.md",
                 "用Semaphore控制同时访问特定资源的线程数.md",
+                "异步神器CompletableFuture.md",
                 "如何手写一个线程池.md",
                 "线程池执行流程.md"
             ]
