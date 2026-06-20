@@ -49,9 +49,6 @@ module.exports = {
                 lastUpdated: "上次更新",
                 nav: [
                     {
-                        text: '导读', link: '/md/other/guide.md'
-                    },
-                    {
                         text: 'AI', link: '/md/ai/claude code 使用教程.md'
                     },
                     {
@@ -61,13 +58,13 @@ module.exports = {
                         text: 'Java',
                         items: [
                             {
-                                text: 'Java面试',
-                                link: '/md/java/说一下八种基本数据类型及其包装类吧.md'
+                                text: 'Java并发',
+                                link: '/md/concurrent/画一个线程状态转换图.md'
                             },
                             {
-                                text: 'Java并发',
-                                link: '/md/concurrent/Synchronized底层实现，锁升级原理.md'
-                            },
+                                text: 'Java面试',
+                                link: '/md/java/说一下八种基本数据类型及其包装类吧.md'
+                            }
                         ]
                     },
                     {
