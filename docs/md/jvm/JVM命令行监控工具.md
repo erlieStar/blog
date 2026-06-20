@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 生产问题排查-JVM命令行监控工具篇
+title: JVM命令行监控工具
 lock: need
 ---
 
-# 生产问题排查-JVM命令行监控工具篇
+# JVM命令行监控工具
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210707140945668.jpg?)
 

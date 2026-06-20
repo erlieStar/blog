@@ -301,6 +301,8 @@ function jvm() {
                 "常见的垃圾回收算法有哪些.md",
                 "垃圾收集器及其适用场景.md",
                 "哪些区域会发生内存溢出.md",
+                "线上服务CPU飙高怎么排查.md",
+                "JVM命令行监控工具.md",
                 "使用MAT进行内存溢出排查.md",
                 "618核心服务内存溢出排查实战.md"
             ]
@@ -785,9 +787,7 @@ function trouble() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "线上服务CPU飙高怎么排查.md",
                 "生产问题排查-网络篇.md",
-                "生产问题排查-JVM命令行监控工具篇.md",
                 "生产问题排查-Linux工具篇.md",
             ],
         }
