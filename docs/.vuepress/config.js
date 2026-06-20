@@ -128,9 +128,6 @@ module.exports = {
                     },
                     {
                         text: '系统设计', link: '/md/system/如何选择合适的消息队列.md'
-                    },
-                    {
-                        text: '问题排查', link: '/md/trouble/线上服务CPU飙高怎么排查.md'
                     }
                 ],
                 sidebar: {
@@ -153,8 +150,7 @@ module.exports = {
                     "/md/kafka/": kafka(),
                     "/md/ai/": ai(),
                     "/md/system/": system(),
-                    "/md/microservices/": microservices(),
-                    "/md/trouble/": trouble(),
+                    "/md/microservices/": microservices()
                 }
             }
         }
@@ -209,6 +205,8 @@ function java() {
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "分布式ID的生成策略有哪些.md",
+                "生产问题排查-网络篇.md",
+                "生产问题排查-Linux工具篇.md",
                 "从浏览器输入URL到页面展示出来，中间发生了什么.md",
                 "加密算法有哪些.md",
                 "https是如何保证安全的.md"
@@ -774,21 +772,6 @@ function microservices() {
                 "分布式事务解决方案.md",
                 "微服务网关有哪些作用.md",
                 "分布式链路追踪.md"
-            ],
-        }
-    ]
-}
-
-
-function trouble() {
-    return [
-        {
-            title: "理论篇",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "生产问题排查-网络篇.md",
-                "生产问题排查-Linux工具篇.md",
             ],
         }
     ]
