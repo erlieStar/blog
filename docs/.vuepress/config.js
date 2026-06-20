@@ -231,7 +231,8 @@ function concurrent() {
                 "如何优雅的停止线程.md",
                 "InterruptedException有啥用.md",
                 "如何解决死锁.md",
-                "CAS工作原理.md"
+                "CAS工作原理.md",
+                "管程和信号量.md"
             ]
         },
         {
