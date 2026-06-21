@@ -7,31 +7,76 @@ lock: need
 # JVM实战：JVM运行时数据区包含哪几部分？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/896f5bb63b594c90a4840aa57ff718f7.png?)
-## JVM的作用是啥？
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190121174837892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
-
-JVM有2个特别有意思的特性，**语言无关性和平台无关性**。
-
-语言无关性是指实现了Java虚拟机规范的语言对可以在JVM上运行，如Groovy，和在大数据领域比较火的语言Scala，因为JVM最终运行的是class文件，只要最终的class文件复合规范就可以在JVM上运行。
-
-平台无关性是指安装在不同平台的JVM会把class文件解释为本地的机器指令，从而实现Write Once，Run Anywhere
 ## JVM运行时数据区
-Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则依赖用户线程的启动和结束而建立和销毁。Java虚拟机所管理的内存将会包括以下几个运行时数据区域
+Java虚拟机（JVM）在运行Java程序时，会把它管理的内存划分为若干个不同的数据区域。这就是JVM运行时数据区
+
+我们可以把这些区域分为两大类：**线程共享区**（所有线程都能访问，生命周期与JVM相同）和**线程私有区**（每个线程独享，生命周期与线程相同）
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190118194119929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
 
-**其中方法区和堆是所有线程共享的数据区。程序计数器，虚拟机栈，本地方法栈是线程隔离的数据区，** 画一个逻辑图
+**线程共享区**：堆和方法区
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190120182439808.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+**线程私有区**：程序计数器，虚拟机栈，本地方法栈
 
+## 线程私有区
+这些区域随着线程的启动而创建，随着线程的结束而销毁。因为是线程私有的，所以**不存在内存并发安全问题**
 ### 程序计数器
-程序计数器是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器
+**角色**：当前线程所执行的字节码的行号指示器
 
-为什么要记录当前线程所执行的字节码的行号？直接执行完不就可以了吗？
+**作用**：JVM的执行引擎就是通过改变这个计数器的值来选取下一条需要执行的字节码指令。在多线程轮流切换场景下，它用于记录线程切换回来后的执行位置
 
-因为代码是在线程中运行的，线程有可能被挂起。即CPU一会执行线程A，线程A还没有执行完被挂起了，接着执行线程B，最后又来执行线程A了，CPU得知道执行线程A的哪一部分指令，线程计数器会告诉CPU。
+**特点**：
+1. 内存空间很小
+2. 它是JVM规范中唯一一个没有规定任何 OutOfMemoryError（OOM）情况的区域
 
+### 虚拟机栈
+**角色**：主管Java方法运行的内存模型
+**内部结构**：每个方法被执行的时候，Java虚拟机都会同步创建一个栈帧
+
+1. 局部变量表：存放编译期可知的各种基本数据类型（int, char, boolean等）和对象引用（reference）
+2. 操作数栈：主要用于保存计算过程中的中间结果，同时作为计算过程中变量临时的存储空间
+3. 动态链接：指向运行时常量池中该栈帧所属方法的引用，为了支持方法调用过程中的动态连接
+4. 方法出口（返回地址）：存放调用该方法的位置，以便方法结束时能够返回
+
+**异常情况**
+
+如果线程请求的栈深度大于虚拟机所允许的深度，将抛出 StackOverflowError（比如无限循环）
+
+如果栈容量允许动态扩展，当扩展时无法申请到足够内存，会抛出 OutOfMemoryError
+### 本地方法栈
+
+**角色**：本地方法栈（Native Method Stack）与虚拟机栈锁发挥的作用是非常相似的，他们之间的区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的Native方法服务。
+
+## 线程共享区
+
+这些区域在JVM启动时创建，被所有线程共享，是垃圾回收（GC）重点眷顾的肥沃土地
+### Java堆
+**角色**：JVM中**最大的一块内存区域**，几乎所有的**对象实例和数组**都要在这里分配内存
+
+**垃圾回收的核心区**：由于是GC的主战场，堆内存通常会被进一步划分，经典的划分方式（Java 8及以前）包括
+
+**新生代（Young Generation）**：又分为 Eden 区、Survivor 0 (From) 区、Survivor 1 (To) 区
+
+**老年代（Old Generation）**
+
+注意：到了 Java 9 及之后的现代垃圾回收器（如 G1, ZGC），堆的划分变成了无数个独立区域（Region），但其存放对象实例的核心本质没变
+
+**异常情况**：如果没有内存完成实例分配，并且堆也无法再扩展时，抛出 OutOfMemoryError: Java heap space
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190829233955325.png?)
+### 方法区
+角色：用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据
+
+**演进历史（极其重要）**：
+
+jdk1.8以前：方法区的实现被称为永久代（Permanent Generation），它使用的是JVM内部的堆内存。
+
+jdk 1.8 及以后：废除了永久代，改用元空间（Metaspace）来实现方法区。元空间不在JVM堆内存中，而是直接使用本地物理内存（Native Memory）
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190121172050704.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+## 附录
+
+细化一下上面提到的内容
 ### 虚拟机栈
 虚拟机栈存储当前线程运行方法所需要的数据，指令，返回地址。虚拟机栈描述的是Java方法执行的内存模型：**每个方法在执行的同时都会创建一个栈帧用于存储局部变量表，操作数栈，动态链接，方法出口等信息**。每个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
 
@@ -209,16 +254,3 @@ iadd：对操作数栈栈顶的2个只进行加法运算，并将结果重新存
 **动态链接**
 
 Java有些方法，类加载的过程中就能知道具体执行的逻辑，而有些需要在运行的过程中才能确定具体执行的逻辑（多态），这就是动态链接在起作用，具体的实现没太看懂，就不过多分析了。
-### 本地方法栈
-本地方法栈（Native Method Stack）与虚拟机栈锁发挥的作用是非常相似的，他们之间的区别不过是虚拟机栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的Native方法服务。
-### Java堆
-对于大多数应用来说，Java堆（Java Heap）是Java虚拟机锁管理的内存中最大的一块。Java堆是所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存
-### 方法区
-方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码等数据。
-## JVM内存模型
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190121172050704.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
-
-由颜色可以看出，jdk1.8之前，堆内存被分为新生代，老年代，永久带，jdk1.8及以后堆内存被分成了新生代和老年代。新生代的区域又分为eden区，s0区，s1区，默认比例是8:1:1，元空间可以理解为直接的物理内存
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190829233955325.png?)
