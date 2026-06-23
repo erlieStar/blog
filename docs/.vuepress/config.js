@@ -292,7 +292,7 @@ function jvm() {
             children: [
                 "类加载的过程.md",
                 "构造函数，静态代码块，构造代码块执行顺序.md",
-                "详解ClassLoader.md",
+                "ClassLoader原理及应用.md",
                 "JVM运行时数据区包含哪几部分.md",
                 "JVM内存分配策略.md",
                 "哪些内存可以回收.md",
