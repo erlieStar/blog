@@ -170,7 +170,6 @@ function java() {
                 "同样是等待，说一下sleep和wait的区别.md",
                 "说一下Http请求的报文格式及常用状态码.md",
                 "写一下单例模式吧，知道单例模式有几种写法吗.md",
-                "说一下构造函数，静态代码块，构造代码块等的加载顺序.md",
                 "你知道zookeeper有哪些作用吗.md",
                 "MyBatis你只写了接口为啥就能执行sql啊.md",
                 "如何查看端口被哪个应用程序占用.md",
@@ -292,6 +291,7 @@ function jvm() {
             sidebarDepth: 0,
             children: [
                 "类加载的过程.md",
+                "构造函数，静态代码块，构造代码块执行顺序.md",
                 "详解ClassLoader.md",
                 "JVM运行时数据区包含哪几部分.md",
                 "JVM内存分配策略.md",
