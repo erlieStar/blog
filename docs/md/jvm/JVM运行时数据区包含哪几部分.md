@@ -95,6 +95,7 @@ public int methodOne(int a, int b) {
 
 假如methodOne方法调用methodTwo方法时， 虚拟机栈的情况如下
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190120182918856.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p6dGlfZXJsaWU=,size_16,color_FFFFFF,t_70)
+
 当虚拟机栈无法再放下栈帧的时候，就会出现StackOverflowError，演示一下
 
 ```java
