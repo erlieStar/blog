@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 分布式ID的生成策略有哪些？
+title: 分布式ID生成策略
 lock: need
 ---
 
-# 面试官：分布式ID的生成策略有哪些？
+# 分布式ID生成策略
 ![请添加图片描述](https://img-blog.csdnimg.cn/c611f4317dc344d0aedf8027ceabb4c1.jpg?)
 ## 介绍
 在很多业务系统中，我们经常会遇到生成全局唯一的分布式ID的需求，如IM系统，订单系统等。那么生成全局唯一的分布式ID的方法有哪些呢？

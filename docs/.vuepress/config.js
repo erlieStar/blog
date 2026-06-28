@@ -68,7 +68,7 @@ module.exports = {
                         ]
                     },
                     {
-                        text: 'JVM', link: '/md/jvm/常见的垃圾回收算法有哪些.md'
+                        text: 'JVM', link: '/md/jvm/类加载流程.md'
                     },
                     {
                         text: 'Spring', link: '/md/spring/Spring容器启动流程.md'
@@ -77,7 +77,7 @@ module.exports = {
                         text: 'Mybatis', link: '/md/mybatis/JDBC用法一览.md'
                     },
                     {
-                        text: 'Redis', link: '/md/redis/Redis数据结构为什么既省内存又高效.md'
+                        text: 'Redis', link: '/md/redis/Redis架构.md'
                     },
                     {
                         text: 'MySQL', link: '/md/mysql/数据是如何进行存储和查询的.md'
@@ -203,7 +203,6 @@ function java() {
                 "说一下Spring Boot的启动过程把.md",
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
-                "分布式ID的生成策略有哪些.md",
                 "生产问题排查-网络篇.md",
                 "生产问题排查-Linux工具篇.md",
                 "从浏览器输入URL到页面展示出来，中间发生了什么.md",
@@ -745,6 +744,7 @@ function system() {
                 "如何对系统进行监控.md",
                 "多级负载均衡架构.md",
                 "分布式锁实现方式.md",
+                "分布式ID生成策略.md",
                 "MongoDB架构详解.md"
             ],
         },
@@ -754,7 +754,8 @@ function system() {
             sidebarDepth: 0,
             children: [
                 "如何设计一个短链系统.md",
-                "如何设计一个秒杀系统.md"
+                "如何设计一个秒杀系统.md",
+                "电商系统分库分表.md"
             ],
         }
     ]
