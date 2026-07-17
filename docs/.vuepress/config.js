@@ -179,7 +179,6 @@ function java() {
                 "多个线程执行完毕后，才执行另一个线程，该怎么做.md",
                 "Servlet Filter和Spring MVC Interceptor有哪些区别.md",
                 "说一下你对数据库事务四大特性的理解.md",
-                "HashMap死循环形成的原因是什么.md",
                 "让你写一个单点登陆组件，你会怎么实现.md",
                 "说一下装饰者模式的作用，以及哪些地方用到了装饰者模式吧",
                 "说一下NIO和BIO的区别.md",
@@ -276,7 +275,8 @@ function concurrent() {
                 "HashMap-1.7.md",
                 "HashMap-1.8.md",
                 "ConcurrentHashMap-1.7.md",
-                "ConcurrentHashMap-1.8.md"
+                "ConcurrentHashMap-1.8.md",
+                "HashMap死循环形成的原因是什么.md",
             ]
         },
     ]

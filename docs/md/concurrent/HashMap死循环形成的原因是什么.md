@@ -4,7 +4,7 @@ title: HashMap死循环形成的原因是什么？
 lock: need
 ---
 
-# 面试官：HashMap死循环形成的原因是什么？
+# 并发容器：HashMap死循环形成的原因是什么？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020090200112054.jpg?)
 
