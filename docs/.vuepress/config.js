@@ -738,6 +738,7 @@ function system() {
             sidebarDepth: 0,
             children: [
                 "如何保证缓存和数据库的一致性.md",
+                "Kafka和RocketMQ的区别.md",
                 "如何选择合适的消息队列.md",
                 "数据库如何实现高性能.md",
                 "如何保证接口的幂等性.md",
