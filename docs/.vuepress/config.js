@@ -325,6 +325,7 @@ function mysql() {
                 "explain详解-2.md",
                 "MySQL索引为什么要用B+树实现.md",
                 "索引优化策略有哪些.md",
+                "如何优化慢SQL.md",
                 "join 语句怎么优化.md",
                 "order by 语句怎么优化.md",
                 "分页如何优化.md",
@@ -753,12 +754,13 @@ function system() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "如何设计一个短链系统.md",
-                "如何设计一个秒杀系统.md",
-                "电商系统分库分表.md",
+                "短链系统设计.md",
+                "秒杀系统设计.md",
                 "红包系统设计.md",
                 "信息流系统设计.md",
-                "点赞系统设计.md"
+                "点赞系统设计.md",
+                "高并发系统设计.md",
+                "电商系统分库分表.md"
             ],
         }
     ]
