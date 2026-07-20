@@ -755,7 +755,6 @@ function system() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "短链系统设计.md",
                 "秒杀系统设计.md",
                 "红包系统设计.md",
                 "信息流系统设计.md",
