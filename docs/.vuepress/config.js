@@ -258,7 +258,7 @@ function concurrent() {
                 "Synchronized和Lock接口有哪些区别.md",
                 "ReentrantReadWriteLock是如何做到读读并行的.md",
                 "CountDownLatch有哪些用处.md",
-                "CyclicBarrier，一不小心，锁就不能重用了.md",
+                "循环屏障CyclicBarrier.md",
                 "用Semaphore控制同时访问特定资源的线程数.md",
                 "异步神器CompletableFuture.md",
                 "如何手写一个线程池.md",

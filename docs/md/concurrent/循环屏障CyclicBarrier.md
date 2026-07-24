@@ -1,10 +1,15 @@
 ---
 layout: post
-title: CyclicBarrier，一不小心，锁就不能重用了
+title: 循环屏障CyclicBarrier
 lock: need
 ---
-# 并发工具：CyclicBarrier，一不小心，锁就不能重用了
+# 并发工具类：循环屏障CyclicBarrier
+
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/83487f1fde1681a2dc1f9f22690a18e3.jpeg)
+## 介绍
+CyclicBarrier 是 Java 并发包（java.util.concurrent）中提供的一个同步辅助类。它允许一组线程互相等待，直到所有线程都到达同一个屏障点（Barrier），然后再一起继续执行
+
+之所以叫 **Cyclic**（循环的），是因为它在所有等待线程被释放后可以重用，这是它与 CountDownLatch 最核心的区别之一
 ## 用CyclicBarrier协调都地主
 斗地主是一个非常有意思的娱乐活动，但是斗地主必须够3个人才能开始，每次凑够3个人就能开一桌。我们该如何实现这个功能呢？
 
@@ -138,6 +143,13 @@ public int await() throws InterruptedException, BrokenBarrierException {
 }
 ```
 最终调用到dowait方法
+
+```java
+// 如下是 CyclicBarrier 的2个成员变量
+private final ReentrantLock lock = new ReentrantLock();
+private final Condition trip = lock.newCondition();
+```
+
 ```java
 // timed 是否超时阻塞
 // nanos 阻塞等待的时长
@@ -353,8 +365,9 @@ CyclicBarrier和CountDownLatch都能让一组线程达到某个条件再继续�
 
 **不同点**
 
-**作用对象不同**：CyclicBarrier需要等到固定数量的线程都到达栅栏位置才能执行，作用对象是线程。而CountDownLatch只需要把state的值减少到1即可，作用对象是state值
+| 特性 | CyclicBarrier | CountDownLatch|
+|--|--|--|
+| 可复用性 | 支持复用，屏障放行后自动重置 | 一次性，计数归零后无法再重置|
+|  底层实现| 基于 ReentrantLock 和 Condition 实现 | 基于 AQS（AbstractQueuedSynchronizer）共享锁实现|
+| 额外动作 | 支持传入 Runnable barrierAction 在归零时触发 | 不支持触发额外动作|
 
-**可重用性不同**：CyclicBarrier可以不断重用，而CountDownLatch只能使用一次
-
-**执行额外任务不同**：CyclicBarrier当固定线程都到达栅栏处时，可以让主线程执行一个任务。而CountDownLatch则不行

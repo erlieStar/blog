@@ -4,7 +4,7 @@ title: Synchronized和Lock接口有哪些区别？
 lock: need
 ---
 
-# Synchronized和Lock接口有哪些区别？
+# 并发工具类：Synchronized和Lock接口有哪些区别？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210103190005603.jpg?)
 ## Lock接口的使用
