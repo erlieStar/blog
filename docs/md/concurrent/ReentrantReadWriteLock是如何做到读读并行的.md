@@ -7,68 +7,13 @@ lock: need
 # 并发工具类：ReentrantReadWriteLock是如何做到读读并行的？
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/b1e89d2f90727ef5909605c411cf027c.png)
 ## ReentrantReadWriteLock的特点
-当我们想保证并发安全的时候，我们可以使用ReentrantLock或者synchronized。这样就能做到写写互斥，读写互斥，读读互斥。
+普通的锁（如 ReentrantLock 或 synchronized）都是独占锁（排他锁），即无论读写，同一时刻只允许一个线程访问。但在很多实际场景中，读操作远多于写操作。如果读读也互斥，就会极大限制并发性能
 
-鉴于大多数业务场景中都是读多写少，我们有没有可能做到读读并行呢？还真可以，这个类就是ReentrantReadWriteLock
-```java
-@Test
-public void testLock() throws IOException {
-    ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-    ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
-    ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
-    Thread thread1 = new Thread(() -> {
-        readLock.lock();
-        System.out.println("thread1 read lock " + System.currentTimeMillis());
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("thread1 read unlock " + System.currentTimeMillis());
-        readLock.unlock();
-    });
-    Thread thread2 = new Thread(() -> {
-        readLock.lock();
-        System.out.println("thread2 read lock " + System.currentTimeMillis());
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("thread2 read unlock " + System.currentTimeMillis());
-        readLock.unlock();
-    });
-    Thread thread3 = new Thread(() -> {
-        writeLock.lock();
-        System.out.println("thread3 write lock " + System.currentTimeMillis());
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("thread3 write unlock " + System.currentTimeMillis());
-        writeLock.unlock();
-    });
-    thread1.start();
-    thread2.start();
-    thread3.start();
-    System.in.read();
-}
-```
-执行结果
-```java
-thread1 read lock 1646210521360
-thread2 read lock 1646210521360
-thread1 read unlock 1646210522362
-thread2 read unlock 1646210522362
-thread3 write lock 1646210522362
-thread3 write unlock 1646210523367
-```
+ReentrantReadWriteLock 通过将锁拆分为读锁（ReadLock） 和 写锁（WriteLock），实现了“读读共享，读写互斥，写写互斥”，在读多写少的场景下能够大幅提升并发吞吐量
 
-从上面的执行结果，**我们可以看到读锁和写锁互斥，但是读锁和读锁可以并行**
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/5b448f995467561ce71024522805a8e1.png)
 
-和ReentrantLock类似ReadWriteLock也分为公平锁和非公平锁。到现在估计你也能猜出来公平性和非公平性体现在哪了！
+和ReentrantLock类似ReadWriteLock也分为公平锁和非公平锁
 ```java
 public ReentrantReadWriteLock(boolean fair) {
     sync = fair ? new FairSync() : new NonfairSync();
@@ -76,6 +21,18 @@ public ReentrantReadWriteLock(boolean fair) {
     writerLock = new WriteLock(this);
 }
 ```
+ReentrantReadWriteLock 维护了一对锁
+
+**读锁**：允许多个线程同时获取，进行并发读取
+
+**写锁**：同一时刻只允许一个线程获取，进行独占写入
+
+| 锁状态 / 尝试获取 | 读锁 | 写锁|
+|--|--|--|
+| 无锁 | 允许 | 允许 |
+| 已加读锁 |允许（读读共享）  | 拒绝（读写互斥） |
+| 已加写锁 | 拒绝（读写互斥） | 拒绝（写写互斥）|
+
 
 从ReadWriteLock的行为我们可以猜到，写锁是互斥锁，读锁是共享锁，但是AQS中只提供了一个state变量来表示锁的状态。
 
@@ -83,6 +40,18 @@ public ReentrantReadWriteLock(boolean fair) {
 
 在ReadWriteLock中是这样做的，state变量的高16位表示读锁的状态，低16位表示写锁的状态
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/3093ee077352e42f3d5c93a6068d23c9.png)
+## 核心特性
+### 可重入性
+读锁和写锁都支持重入。同一个线程在持有锁的情况下，可以再次获取该锁而不会发生死锁（底层通过内部计数器记录重入次数）
+
+### 锁降级（Lock Downgrading）与锁升级（Lock Upgrading）
+**支持锁降级**：持有写锁的线程，可以先获取读锁，再释放写锁。这样该线程就从“写模式”平滑降级为“读模式”，且在这个过程中能保证数据一致性（防止其他线程在降级瞬间修改数据）
+
+**不支持锁升级**：持有读锁的线程不能直接获取写锁。如果需要获取写锁，必须先释放读锁。若多个线程同时持有读锁并尝试升级为写锁，会导致死锁
+### 公平与非公平策略
+**非公平模式（默认）**：吞吐量更高，但可能导致写线程“饥饿”（因为读线程源源不断占锁）
+
+**公平模式**：按照 FIFO（先进先出）队列顺序获取锁。如果队列中有线程在等待写锁，后续尝试获取读锁的线程也会被阻塞，从而避免写线程饥饿
 ## 获取写锁
 鉴于写锁的实现比较简单，我们就先看写锁的实现，再看读锁的实现
 ```java
@@ -109,7 +78,7 @@ protected final boolean tryAcquire(int acquires) {
     // 获取写锁的值
     int w = exclusiveCount(c);
     if (c != 0) {
-    	// state不为0，写锁为0，说明读锁不为0
+        // state不为0，写锁为0，说明读锁不为0
         // (Note: if c != 0 and w == 0 then shared count != 0)
         // 1. 读锁不为0
         // 2. 写锁不为0，并且获取写锁的线程不是当前线程，则写锁加锁失败
@@ -132,10 +101,6 @@ protected final boolean tryAcquire(int acquires) {
     return true;
 }
 ```
-**在这里我们先引入2个概念**
-
-锁升级：同一个线程先申请读锁，再申请写锁，此时能正确申请到写锁
-锁降低：同一个线程先申请写锁，再申请读锁，此时能正确申请到读锁
 
 **从上面的源码中我们可以看到申请写锁的时候，只要有读锁就会失败，因此ReadWriteLock并不支持锁升级**
 
@@ -228,14 +193,14 @@ protected final int tryAcquireShared(int unused) {
         r < MAX_COUNT &&
         compareAndSetState(c, c + SHARED_UNIT)) {
         if (r == 0) {
-        	// 第一个获取读锁
+            // 第一个获取读锁
             firstReader = current;
             firstReaderHoldCount = 1;
         } else if (firstReader == current) {
-        	// 读锁重入
+            // 读锁重入
             firstReaderHoldCount++;
         } else {
-        	// cachedHoldCounter用来保存最后一个获取读锁的线程
+            // cachedHoldCounter用来保存最后一个获取读锁的线程
             HoldCounter rh = cachedHoldCounter;
             if (rh == null || rh.tid != getThreadId(current))
                 cachedHoldCounter = rh = readHolds.get();
@@ -278,14 +243,14 @@ public final boolean releaseShared(int arg) {
 // Sync
 protected final boolean tryReleaseShared(int unused) {
 
-	// 省略部分无关代码
-	
+    // 省略部分无关代码
+    
     for (;;) {
         int c = getState();
         // 将读锁次数减1
         int nextc = c - SHARED_UNIT;
         if (compareAndSetState(c, nextc))
-        	// nextc == 0表示读锁和写锁都被释放了
+            // nextc == 0表示读锁和写锁都被释放了
             return nextc == 0;
     }
 }
