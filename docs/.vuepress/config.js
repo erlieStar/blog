@@ -692,6 +692,14 @@ function elasticsearch() {
 function kafka() {
     return [
         {
+            title: "随笔",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "Kafka如何保证消息的可靠性投递.md",
+            ],
+        },
+        {
             title: "Kafka架构",
             collapsable: false,
             sidebarDepth: 0,
@@ -701,14 +709,6 @@ function kafka() {
                 "Kafka消息存储.md",
                 "Kafka消息消费.md",
                 "Kafka线上问题.md"
-            ],
-        },
-        {
-            title: "Kafka面试",
-            collapsable: false,
-            sidebarDepth: 0,
-            children: [
-                "Kafka如何保证消息的可靠性投递.md",
             ],
         }
     ]
