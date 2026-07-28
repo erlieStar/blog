@@ -696,7 +696,8 @@ function kafka() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
-                "Kafka如何保证消息的可靠性投递.md",
+                "消息堆积应该如何处理.md",
+                "如何保证消息的可靠性投递.md",
             ],
         },
         {
