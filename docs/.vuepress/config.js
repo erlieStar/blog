@@ -114,6 +114,10 @@ module.exports = {
                                 link: '/md/dubbo/Dubbo的前世今生.md'
                             },
                             {
+                                text: 'Sentinel',
+                                link: '/md/sentinel/Sentinel 与 Hystrix 的对比.md'
+                            },
+                            {
                                 text: '分布式事务',
                                 link: '/md/transaction/XA规范.md'
                             },
@@ -150,7 +154,8 @@ module.exports = {
                     "/md/kafka/": kafka(),
                     "/md/ai/": ai(),
                     "/md/system/": system(),
-                    "/md/microservices/": microservices()
+                    "/md/microservices/": microservices(),
+                    "/md/sentinel/": sentinel()
                 }
             }
         }
@@ -780,6 +785,20 @@ function microservices() {
                 "注册中心选型.md",
                 "微服务网关有哪些作用.md",
                 "分布式链路追踪.md"
+            ],
+        }
+    ]
+}
+
+
+function sentinel() {
+    return [
+        {
+            title: "sentinel",
+            collapsable: false,
+            sidebarDepth: 0,
+            children: [
+                "Sentinel 与 Hystrix 的对比.md"
             ],
         }
     ]
