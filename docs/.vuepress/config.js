@@ -178,7 +178,6 @@ function java() {
                 "你知道zookeeper有哪些作用吗.md",
                 "如何查看端口被哪个应用程序占用.md",
                 "如何控制多线程执行顺序.md",
-                "Spring AOP是怎么实现的.md",
                 "cookie和session是怎么交互的.md",
                 "多个线程执行完毕后，才执行另一个线程，该怎么做.md",
                 "说一下你对数据库事务四大特性的理解.md",
@@ -515,6 +514,7 @@ function spring() {
             collapsable: false,
             sidebarDepth: 0,
             children: [
+                "Spring AOP是怎么实现的.md",
                 "详解Spring AOP的前世今生.md",
                 "解析切面.md",
                 "生成代理对象.md",
