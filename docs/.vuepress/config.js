@@ -182,7 +182,6 @@ function java() {
                 "Spring AOP是怎么实现的.md",
                 "cookie和session是怎么交互的.md",
                 "多个线程执行完毕后，才执行另一个线程，该怎么做.md",
-                "Servlet Filter和Spring MVC Interceptor有哪些区别.md",
                 "说一下你对数据库事务四大特性的理解.md",
                 "让你写一个单点登陆组件，你会怎么实现.md",
                 "说一下装饰者模式的作用，以及哪些地方用到了装饰者模式吧",
@@ -201,10 +200,8 @@ function java() {
                 "final关键字有哪些作用.md",
                 "Get和Post的区别是什么.md",
                 "Object类有哪些方法.md",
-                "Spring MVC拦截器有哪些应用场景.md",
                 "Spring Boot 自动装配是如何实现的.md",
                 "如何手写一个Spring Boot starter.md",
-                "说一下Spring Boot的启动过程把.md",
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "生产问题排查-网络篇.md",
@@ -551,7 +548,9 @@ function spring() {
                 "参数解析器，简化参数取值过程.md",
                 "返回值处理器，处理多种返回值类型.md",
                 "异常解析器，统一处理请求中发生的异常.md",
-                "自定义组件的注入方式有多少种.md"
+                "自定义组件的注入方式有多少种.md",
+                "Spring MVC拦截器有哪些应用场景.md",
+                "Servlet Filter和Spring MVC Interceptor有哪些区别.md"
             ]
         },
         {

@@ -4,7 +4,7 @@ title: Spring MVC拦截器有哪些应用场景？
 lock: need
 ---
 
-# 面试官：Spring MVC拦截器有哪些应用场景？
+# Spring MVC源码解析：Spring MVC拦截器有哪些应用场景？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190825231001137.jpg?)
 ## 自定义拦截器

@@ -4,7 +4,7 @@ title: Servlet Filter和Spring MVC Interceptor有哪些区别？
 lock: need
 ---
 
-# 30.面试官：Servlet Filter和Spring MVC Interceptor有哪些区别？
+# Spring MVC源码解析：Servlet Filter和Spring MVC Interceptor有哪些区别？
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2020091218131664.jpg?)
 ## 介绍
