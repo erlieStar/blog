@@ -5,10 +5,10 @@ lock: need
 ---
 
 # Dubbo源码解析：5分钟了解 Dubbo SPI 的特性
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200808182717643.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/470386f25f41c5f976dfe7ced5c74883.png)
 ## 介绍
 Dubbo的架构是基于分层来设计的，每层执行固定的功能，上层依赖下层，下层的改变对上层不可见，每层都是可以被替换的组件
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200805213437530.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/a3e778aa365f55d465fedb9d54f924b6.png)
 Service和Config为API接口层，让Dubbo使用者方便的发布和引用服务
 其他各层均为SPI层，意味着每层都是组件化的，可以被替换
 
@@ -27,7 +27,8 @@ Java SPI是通过策略模式实现的，一个接口提供多个实现类，而
 4. 在代码中通过java.util.ServiceLoader#load加载具体的实现类
 
 写个Demo演示一下
-![在这里插入图片描述](https://img-blog.csdnimg.cn/202007261047254.png?)
+
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/609f6261617c47749a9e7dc331904632.png)
 ```java
 public interface Car {
 
@@ -75,7 +76,7 @@ public class JavaSpiDemo {
 ```
 
 ## Dubbo SPI
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200729232543292.PNG?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/45c97f60907c5df72f1f0a652c6da516.png)
 
 用Dubbo SPI将上面的例子改造一下
 
@@ -411,7 +412,7 @@ implements Wheel {
 <dubbo:application compiler="jdk" />
 ```
 Compiler类图如下
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200808174219100.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ec95ccaf5f303c03c906b8a127c60161.png)
 
 
 ```java
@@ -596,4 +597,4 @@ public class ActivateDemo {
 
 **即group通过传入的组来过滤，value通过判断url是否有指定的key来过滤**。后面分析源码的时候你会更清楚
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210617145549653.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/b3ed4665288ae1592cd4dcee4eca77ab.jpeg)
