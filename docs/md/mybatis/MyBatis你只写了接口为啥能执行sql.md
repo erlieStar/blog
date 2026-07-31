@@ -4,7 +4,7 @@ title: MyBatis你只写了接口为啥就能执行sql啊
 lock: need
 ---
 
-# 面试官：MyBatis你只写了接口为啥就能执行sql啊
+# Mybatis源码解析：MyBatis你只写了接口为啥能执行sql
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200902214646363.jpg?)
 

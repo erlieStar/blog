@@ -1,12 +1,12 @@
 ---
 layout: post
-title: 说一下Spring MVC的执行流程，为什么要这么设计？
+title: Spring MVC执行流程
 lock: need
 ---
 
 
-# 面试官：说一下Spring MVC的执行流程，为什么要这么设计？
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201011164055432.jpg?)
+# Spring MVC源码解析：Spring MVC执行流程
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/fb6fa3f786d3b987c5685fd0229e2e7a.jpeg)
 ## 手写一个Spring MVC
 我们先手写一个Spring MVC，让你对Spring MVC的整体实现有一个基本的认识
 
@@ -177,7 +177,8 @@ http://localhost:8080/show/index/user
 2. 有请求的时候，根据url从map中找到对应的方法，执行方法返回结果
 
 ## Spring MVC执行流程
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200317133227811.jpg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/0663196f394a4222ae47c26f63d27759.png)
+
 上图展示了一个Spring MVC的执行流程
 
 1. 用户发送请求到DispatcherServlet
@@ -192,7 +193,7 @@ http://localhost:8080/show/index/user
 ## DispatcherServlet
 
 DispatcherServlet继承关系如下图，HttpServlet类及其父类定义在javax包中，其余是定义在Spring包中
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201011172928771.png?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/2b2b45a5af1294861f8093dc57e85615.png)
 **可以看到DispatcherServlet本质上是一个HttpServlet**。
 
 想想我们之前不用Spring MVC如何写一个web程序？
@@ -201,7 +202,7 @@ DispatcherServlet继承关系如下图，HttpServlet类及其父类定义在java
 
 可以看到以前是针对一个请求创建一个HttpServlet，现在是将所有的请求都转发到DispatcherServlet，然后由DispatcherServlet反射调用controller的方法，然后将结果返回给用户
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201011180124606.jpeg?)
+![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/50df7bac9dcc3e5d0e22a58ee4a5c475.jpeg)
 **这么做的目的主要是统一管理web请求的处理流程，Struts和Spring MVC都是这种设计**
 
 当Spring容器启动或者刷新的时候，DispatcherServlet会初始化后续常用的组件，如HandlerMapping，HandlerAdapter，ViewResolver等。
@@ -247,26 +248,26 @@ public class AddressController implements HttpRequestHandler {
 
 **既然Handler的实现有很多种，相应的查找方式也应该有很多中**，Spring MVC中有3个HandlerMapping的实现类，对应不同的映射策略
 
-| 映射策略            | handler实现方式                                          | 查找实现类                   |
-| ------------------- | -------------------------------------------------------- | ---------------------------- |
-| 简单url映射         | 实现HttpRequestHandler接口；实现Controller接口，指定路径 | SimpleUrlHandlerMapping      |
-| BeanName映射        | 实现Controller接口不指定路径                             | BeanNameUrlHandlerMapping    |
-| @RequestMapping映射 | 使用@RequestMapping注解                                  | RequestMappingHandlerMapping |
+|映射策略| handler实现方式|查找实现类 |
+|--|--|--|
+| 简单url映射 |实现HttpRequestHandler接口；实现Controller接口，指定路径|SimpleUrlHandlerMapping|
+|BeanName映射|实现Controller接口不指定路径|BeanNameUrlHandlerMapping|
+|@RequestMapping映射 |使用@RequestMapping注解|RequestMappingHandlerMapping|
 
 ## HandlerAdapter
 其实我刚开始就不明白为啥要有HandlerAdapter这个组件，既然已经找到的handler，直接调用handler的方法不就行了。
 
-**知道我知道了handler的实现方式有很多种时，才意识到HandlerAdapter是必须的，因为每种handler，调用逻辑是不一样的。有了HandlerAdapter可以解耦，不然又是一堆if else**
+**直到我知道了handler的实现方式有很多种时，才意识到HandlerAdapter是必须的，因为每种handler，调用逻辑是不一样的。有了HandlerAdapter可以解耦，不然又是一堆if else**
 
 例如，实现Controller接口的handler，调用逻辑是执行handleRequest方法，用@RequestMapping的handler，是通过反射来执行方法。
 
 常用的HandlerAdapter如下
 
-| 类名                           | 作用                                                         |
-| ------------------------------ | ------------------------------------------------------------ |
-| HttpRequestHandlerAdapter      | 执行实现了HttpRequestHandler接口的Handler                    |
-| SimpleControllerHandlerAdapter | 执行实现了Controller接口的Handler                            |
-| RequestMappingHandlerAdapter   | 执行Handler类型是HandlerMethod及其子类的Handler，RequestMappingHandlerMapping返回的Handler是HandlerMethod类型 |
+|类名| 作用 |
+|--|--|
+|HttpRequestHandlerAdapter  |执行实现了HttpRequestHandler接口的Handler  |
+|SimpleControllerHandlerAdapter|执行实现了Controller接口的Handler|
+|RequestMappingHandlerAdapter|执行Handler类型是HandlerMethod及其子类的Handler，RequestMappingHandlerMapping返回的Handler是HandlerMethod类型|
 
 **Spring MVC为什么要搞这么多HandlerMapping和HandlerAdapter呢**
 
