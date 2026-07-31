@@ -4,6 +4,7 @@ title: Condition注解
 lock: need
 ---
 
+# Condition注解
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/0cb523ad3a103b10cbf2b233c992159c.jpeg)
 ## 各种各样的条件注解
 上一节我们提到，为了避免往Spring容器中注入过多的Bean，我们需要使用条件注解，当某些规则满足时，才往容器中注入相关的Bean。本节我们就简单演示一下如何手写一个条件注解，知道大概的工作方式即可，具体的源码就不分析了

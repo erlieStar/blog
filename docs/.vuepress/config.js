@@ -201,7 +201,6 @@ function java() {
                 "Get和Post的区别是什么.md",
                 "Object类有哪些方法.md",
                 "Spring Boot 自动装配是如何实现的.md",
-                "如何手写一个Spring Boot starter.md",
                 "Spring声明式事务在那些情况下会失效.md",
                 "Spring有几种配置方式，每种配置方式的应用场景是啥.md",
                 "生产问题排查-网络篇.md",
@@ -561,7 +560,8 @@ function spring() {
                 "Spring 和 Spring Boot 有哪些区别.md",
                 "详解Spring Boot启动流程.md",
                 "Spring Boot 自动装配是如何实现的.md",
-                "Condition注解.md"
+                "Condition注解.md",
+                "如何手写一个Spring Boot Starter.md"
             ]
         },
     ]

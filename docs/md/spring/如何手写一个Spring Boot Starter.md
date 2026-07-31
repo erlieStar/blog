@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 如何手写一个Spring Boot starter?
+title: 如何手写一个Spring Boot Starter?
 lock: need
 ---
 
-# 面试官：如何手写一个Spring Boot starter
+# 如何手写一个Spring Boot Starter?
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210325224055116.jpg?)
 ## 蛮荒的年代

@@ -4,7 +4,7 @@ title: Spring 和 Spring Boot 有哪些区别？
 lock: need
 ---
 
-# Spring Boot源码解析：Spring 和 Spring Boot 有哪些区别？
+# Spring 和 Spring Boot 有哪些区别？
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/bcbfe22d9b2c4d318e2e329348e5febc.png?)
 ## 手写一个Spring Boot
 当别人问你Spring和Spring Boot的区别时，你可能会随口而出
